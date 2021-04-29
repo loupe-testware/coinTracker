@@ -1,0 +1,7 @@
+{
+  "name": "coinTracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
