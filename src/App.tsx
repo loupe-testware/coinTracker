@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonItem,
+  IonButton,
+  IonInput,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
@@ -55,24 +58,30 @@ const [userDetails, setUserDetails] = useState<userDetails>({
   }
 })
 
-  async function signUp(){
-    try {
-      const { user } = await Auth.signUp({
-          username,
-          password,
-          attributes: {
-              email,         
-          }
-      });
-      console.log(user);
-  } catch (error) {
-      console.log('error signing up:', error);
-  }
-  }
+  // async function signUp(){
+  //   try {
+  //     const { user } = await Auth.signUp({
+  //         username,
+  //         password,
+  //         attributes: {
+  //             email,         
+  //         }
+  //     });
+  //     console.log(user);
+  // } catch (error) {
+  //     console.log('error signing up:', error);
+  // }
+  // }
 
   return (
   <IonApp>
-    <IonReactRouter>
+    <IonItem>
+      <IonInput placeholder='email'type="text"/>
+      <IonInput placeholder='password'type="password"/>
+    </IonItem>
+    <IonButton>CLICK ME</IonButton>
+
+    {/* <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/tab1">
@@ -103,7 +112,7 @@ const [userDetails, setUserDetails] = useState<userDetails>({
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
-    </IonReactRouter>
+    </IonReactRouter> */}
   </IonApp>
   )
 };
