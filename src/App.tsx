@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -13,6 +14,10 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+
+// AWS imports for user authentication
+import Amplify, { Auth } from 'aws-amplify'
+// import awsconfig from './aws-imports'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,7 +38,39 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
+interface userDetails {
+  username: string,
+  password: string,
+  attributes: {
+    email: string
+  }
+}
+
+const App: React.FC = () => {
+const [userDetails, setUserDetails] = useState<userDetails>({
+  username: '',
+  password: '',
+  attributes: {
+    email: ''
+  }
+})
+
+  async function signUp(){
+    try {
+      const { user } = await Auth.signUp({
+          username,
+          password,
+          attributes: {
+              email,         
+          }
+      });
+      console.log(user);
+  } catch (error) {
+      console.log('error signing up:', error);
+  }
+  }
+
+  return (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -68,6 +105,7 @@ const App: React.FC = () => (
       </IonTabs>
     </IonReactRouter>
   </IonApp>
-);
+  )
+};
 
 export default App;
