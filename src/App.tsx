@@ -41,47 +41,120 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-interface userDetails {
-  username: string,
-  password: string,
-  attributes: {
-    email: string
-  }
-}
 
 const App: React.FC = () => {
-const [userDetails, setUserDetails] = useState<userDetails>({
-  username: '',
-  password: '',
-  attributes: {
-    email: ''
-  }
-})
+/* Create the form state and form input state */
+let formState = "signUp";
+let formInputState = { username: '', password: '', email: '', verificationCode: '' };
 
-  // async function signUp(){
-  //   try {
-  //     const { user } = await Auth.signUp({
-  //         username,
-  //         password,
-  //         attributes: {
-  //             email,         
-  //         }
-  //     });
-  //     console.log(user);
-  // } catch (error) {
-  //     console.log('error signing up:', error);
-  // }
-  // }
+/* onChange handler for form inputs */
+function onChange(e) {
+  formInputState = { ...formInputState, [e.target.name]: e.target.value };
+}
+
+/* Sign up function */
+async function signUp() {
+  try {
+    await Auth.signUp({
+      username: formInputState.username,
+      password: formInputState.password,
+      attributes: {
+        email: formInputState.email
+      }});
+    /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA */
+    formState = "confirmSignUp";
+  } catch (err) { console.log({ err }); }
+}
+
+/* Confirm sign up function for MFA */
+async function confirmSignUp() {
+  try {
+    await Auth.confirmSignUp(formInputState.username, formInputState.verificationCode);
+    /* Once the user successfully confirms their account, update form state to show the sign in form*/
+    formState = "signIn";
+  } catch (err) { console.log({ err }); }
+}
+
+/* Sign in function */
+async function signIn() {
+  try {
+    await Auth.signIn(formInputState.username, formInputState.password);
+    /* Once the user successfully signs in, update the form state to show the signed in state */
+    formState = "signedIn";
+  } catch (err) { console.log({ err }); }
+}
 
   return (
   <IonApp>
-    <IonItem>
-      <IonInput placeholder='email'type="text"/>
-      <IonInput placeholder='password'type="password"/>
-    </IonItem>
-    <IonButton>CLICK ME</IonButton>
+  {
+  if (formState === "signUp") {
+  return (
+    <div>
+      <input
+        name="username"
+        onChange={onChange}
+      />
+      <input
+        name="password"
+        type="password"
+        onChange={onChange}
+      />
+      <input
+        name="email"
+        onChange={onChange}
+      />
+      <button onClick={signUp}>Sign Up</button>
+    </div>
+  )
+}
 
-    {/* <IonReactRouter>
+/* If the form state is "confirmSignUp", show the confirm sign up form */
+if (formState === "confirmSignUp") {
+  return (
+    <div>
+      <input
+        name="username"
+        onChange={onChange}
+      />
+      <input
+        name="verificationCode"
+        onChange={onChange}
+      />
+      <button onClick={confirmSignUp}>Confirm Sign Up</button>
+    </div>
+  )
+}
+
+/* If the form state is "signIn", show the sign in form */
+if (formState === "signIn") {
+  return (
+  <div>
+      <input
+        name="username"
+        onChange={onChange}
+      />
+      <input
+        name="password"
+        onChange={onChange}
+      />
+      <button onClick={signIn}>Sign In</button>
+    </div>
+  )
+}
+
+/* If the form state is "signedIn", show the app */
+if (formState === "signedIn") {
+  return (
+    <div>
+      <h1>Welcome to my app!</h1>
+    </div>
+  )
+}
+    }</IonApp>
+  )
+};
+
+ {/* <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/tab1">
@@ -113,8 +186,5 @@ const [userDetails, setUserDetails] = useState<userDetails>({
         </IonTabBar>
       </IonTabs>
     </IonReactRouter> */}
-  </IonApp>
-  )
-};
 
 export default App;
