@@ -1,9 +1,11 @@
 // AWS imports for user authentication
-import { IonCard } from '@ionic/react';
+import { IonCard, IonTitle } from '@ionic/react';
 import Amplify, { Auth } from 'aws-amplify'
 
 // import awsconfig from './aws-imports'
 import { AuthenticationProps } from '../../interfaces/interfaces'
+
+import './Authentication.css'
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
 let formInputState = {password: '', email: '', verificationCode: '' };
@@ -49,18 +51,19 @@ function authRenderSwitch(){
   switch(authState) {
     case 'signUp':
       return(
-        <div>
-        <h1>Sign Up</h1>
+        <div className='authContainer'>
         <input
+          placeholder="email"
+          name="email"
+          onChange={onChange}
+        />
+        <input
+          placeholder="password"
           name="password"
           type="password"
           onChange={onChange}
         />
-        <input
-          name="email"
-          onChange={onChange}
-        />
-        <button onClick={signUp}>Sign Up</button>
+        <button onClick={signUp}>SIGN UP</button>
       </div>
       );
     case 'confirmSignUp':
@@ -100,10 +103,12 @@ function authRenderSwitch(){
 
 
 
-  return(
-    <IonCard>
+  return(<>
+      <IonCard className='authCard'>
+      <h1 className='title'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
-    </IonCard>
+      </IonCard>
+   </>
   )
     }
 

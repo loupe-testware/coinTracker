@@ -1,0 +1,59 @@
+.authCard {
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+  text-align: center;
+  border-radius: 25px;
+}
+
+.title {
+  color: var(--ion-color-primary);
+}
+.authContainer {
+  display: inline-flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+input {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  margin: 20px;
+  border-radius: 20px;
+  height: 50px;
+  border: var(--ion-color-primary) solid 1px;
+  padding: 10px;
+}
+
+button {
+  background-color: var(--ion-color-primary);
+  color: white;
+  margin: 20px;
+  border-radius: 15px;
+  height: 50px;
+  font-size: 1.5rem;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid car(--ion-color-secondary);
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0px 1000px var(--ion-color-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
