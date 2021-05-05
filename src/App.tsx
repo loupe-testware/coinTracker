@@ -43,11 +43,12 @@ import Authentication from './components/Authentication/Authentication'
 
 
 const App: React.FC = () => {
-
+//Create formState to handle the users authentication path
+const [authState, setAuthState] = useState<string>('landingPage')
 
 return(
   <IonApp>
-          <Authentication/> 
+          <Authentication authState={authState} setAuthState={setAuthState}/> 
   </IonApp>
 )
 };

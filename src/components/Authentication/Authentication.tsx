@@ -5,10 +5,12 @@ import {IonItem} from '@ionic/react'
 import Amplify, { Auth } from 'aws-amplify'
 // import awsconfig from './aws-imports'
 
+interface AuthenticationProps {
+  authState: string,
+  setAuthState: any
+}
 
-function Authentication(){
-/* Create the form state and form input state */
-let formState = "signUp";
+function Authentication({authState, setAuthState}: AuthenticationProps){
 let formInputState = { username: '', password: '', email: '', verificationCode: '' };
 
 /* onChange handler for form inputs */
@@ -26,7 +28,7 @@ async function signUp() {
         email: formInputState.email
       }});
     /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA */
-    formState = "confirmSignUp";
+    authState = "confirmSignUp";
   } catch (err) { console.log({ err }); }
 }
 
@@ -35,7 +37,7 @@ async function confirmSignUp() {
   try {
     await Auth.confirmSignUp(formInputState.username, formInputState.verificationCode);
     /* Once the user successfully confirms their account, update form state to show the sign in form*/
-    formState = "signIn";
+    authState = "signIn";
   } catch (err) { console.log({ err }); }
 }
 
@@ -44,12 +46,13 @@ async function signIn() {
   try {
     await Auth.signIn(formInputState.username, formInputState.password);
     /* Once the user successfully signs in, update the form state to show the signed in state */
-    formState = "signedIn";
+    authState = "signedIn";
   } catch (err) { console.log({ err }); }
 }
-        if (formState === "signUp") {
+        if (authState === "signUp") {
             return (
               <div>
+                <h1>Sign Up</h1>
                 <input
                   name="username"
                   onChange={onChange}
@@ -69,9 +72,10 @@ async function signIn() {
           }
           
           /* If the form state is "confirmSignUp", show the confirm sign up form */
-          if (formState === "confirmSignUp") {
+          if (authState === "confirmSignUp") {
             return (
               <div>
+                <h1>Confirm Sign Up</h1>
                 <input
                   name="username"
                   onChange={onChange}
@@ -86,9 +90,10 @@ async function signIn() {
           }
           
           /* If the form state is "signIn", show the sign in form */
-          if (formState === "signIn") {
+          if (authState === "signIn") {
             return (
             <div>
+              <h1>Sign In</h1>
                 <input
                   name="username"
                   onChange={onChange}
@@ -103,9 +108,10 @@ async function signIn() {
           }
           
           /* If the form state is "signedIn", show the app */
-          if (formState === "signedIn") {
+          if (authState === "signedIn") {
             return (
               <div>
+                <h1>Signed In</h1>
                 <h1>Welcome to my app!</h1>
               </div>
             )
