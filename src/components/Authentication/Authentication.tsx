@@ -5,7 +5,12 @@ import Amplify, { Auth } from 'aws-amplify'
 // import awsconfig from './aws-imports'
 import { AuthenticationProps } from '../../interfaces/interfaces'
 
+// style import
 import './Authentication.css'
+
+// You can get the current config object
+const currentConfig = Auth.configure();
+
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
 let formInputState = {password: '', email: '', verificationCode: '' };
@@ -68,14 +73,15 @@ function authRenderSwitch(){
       );
     case 'confirmSignUp':
       return (
-        <div>
-          <h1>Confirm Sign Up</h1>
+        <div className='authContainer'>
           <input
             name="email"
+          placeholder="email"
             onChange={onChange}
           />
           <input
             name="verificationCode"
+            placeholder="code"
             onChange={onChange}
           />
           <button onClick={confirmSignUp}>Confirm Sign Up</button>
@@ -83,14 +89,16 @@ function authRenderSwitch(){
       );
     case 'signIn':
       return (
-        <div>
-          <h1>Sign In</h1>
+        <div className='authContainer'>
             <input
               name="email"
+          placeholder="email"
+
               onChange={onChange}
             />
             <input
               name="password"
+              placeholder="password"
               onChange={onChange}
             />
             <button onClick={signIn}>Sign In</button>
@@ -101,8 +109,6 @@ function authRenderSwitch(){
   }
 }
 
-
-
   return(
   <div className='backgroundFilter'>
       <IonCard className='authCard'>
@@ -112,8 +118,6 @@ function authRenderSwitch(){
    </div>
   )
     }
-
-
 
 export default Authentication
  
