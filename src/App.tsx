@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
-  IonItem,
-  IonButton,
-  IonInput,
+  IonContent,
   IonIcon,
+  IonItem,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
@@ -40,6 +39,7 @@ import './theme/variables.css';
 
 // Components
 import Authentication from './components/Authentication/Authentication'
+import LandingPage from './pages/LandingPage/LandingPage'
 
 
 const App: React.FC = () => {
@@ -47,13 +47,16 @@ const App: React.FC = () => {
 const [authState, setAuthState] = useState<string>('landingPage')
 
 return(
-  <IonApp>
-          <Authentication authState={authState} setAuthState={setAuthState}/> 
+<IonApp>{ authState === 'landingPage' ? 
+    <LandingPage/>
+  :
+    <Authentication authState={authState} setAuthState={setAuthState}/> 
+    }
   </IonApp>
 )
 };
 
- {/* <IonReactRouter>
+{/* <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/tab1">
