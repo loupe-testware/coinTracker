@@ -38,19 +38,19 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 // Components
-import Authentication from './components/Authentication/Authentication'
 import LandingPage from './pages/LandingPage/LandingPage'
 
 
 const App: React.FC = () => {
 //Create formState to handle the users authentication path
 const [authState, setAuthState] = useState<string>('landingPage')
+const [signedIn, setSignedIn] = useState<boolean>(false)
 
 return(
-<IonApp>{ authState === 'landingPage' ? 
-    <LandingPage setAuthState={setAuthState}/>
+<IonApp>{ !signedIn ? 
+    <LandingPage authState={authState} setAuthState={setAuthState} setSignedIn={setSignedIn}/>
   :
-    <Authentication authState={authState} setAuthState={setAuthState}/> 
+   'APP' 
     }
   </IonApp>
 )

@@ -1,12 +1,16 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import logo from '../../assets/logo.svg'
 
+import Authentication from '../../components/Authentication/Authentication'
+
+import { AuthenticationProps } from '../../interfaces/interfaces'
+
 import './LandingPage.css'
 
-function LandingPage({setAuthState}:any){
+function LandingPage({authState, setAuthState, setSignedIn}:AuthenticationProps){
 
-    return (
-        <div className='landingPageContainer'>
+ return (
+     <div className='landingPageContainer'>
             <div className='logoContainer'>
                 <IonIcon src={logo} className='logo'></IonIcon>
             </div>
@@ -19,7 +23,12 @@ function LandingPage({setAuthState}:any){
                     <IonButton onClick={()=>setAuthState('signIn')} className='signInButton' color='white'>SIGN IN</IonButton>
                 </div>
             </div>
-        </div>
+        {authState === 'landingPage' ? 
+        null 
+    :
+    <Authentication authState={authState} setAuthState={setAuthState} setSignedIn={setSignedIn}/>
+    }
+    </div>
     )
 }
 

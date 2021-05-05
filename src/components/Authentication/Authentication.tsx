@@ -1,15 +1,11 @@
-import {IonItem} from '@ionic/react'
-
 // AWS imports for user authentication
+import { IonCard } from '@ionic/react';
 import Amplify, { Auth } from 'aws-amplify'
+
 // import awsconfig from './aws-imports'
+import { AuthenticationProps } from '../../interfaces/interfaces'
 
-interface AuthenticationProps {
-  authState: string,
-  setAuthState: any
-}
-
-function Authentication({authState, setAuthState}: AuthenticationProps){
+function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
 let formInputState = {password: '', email: '', verificationCode: '' };
 
 /* onChange handler for form inputs */
@@ -48,59 +44,67 @@ async function signIn() {
     setAuthState("signedIn");
   } catch (err) { console.log({ err }); }
 }
-        if (authState === "signUp") {
-            return (
-              <div>
-                <h1>Sign Up</h1>
-                <input
-                  name="password"
-                  type="password"
-                  onChange={onChange}
-                />
-                <input
-                  name="email"
-                  onChange={onChange}
-                />
-                <button onClick={signUp}>Sign Up</button>
-              </div>
-            )
-          }
-          
-          /* If the form state is "confirmSignUp", show the confirm sign up form */
-          if (authState === "confirmSignUp") {
-            return (
-              <div>
-                <h1>Confirm Sign Up</h1>
-                <input
-                  name="email"
-                  onChange={onChange}
-                />
-                <input
-                  name="verificationCode"
-                  onChange={onChange}
-                />
-                <button onClick={confirmSignUp}>Confirm Sign Up</button>
-              </div>
-            )
-          }
-          
-          /* If the form state is "signIn", show the sign in form */
-          if (authState === "signIn") {
-            return (
-            <div>
-              <h1>Sign In</h1>
-                <input
-                  name="email"
-                  onChange={onChange}
-                />
-                <input
-                  name="password"
-                  onChange={onChange}
-                />
-                <button onClick={signIn}>Sign In</button>
-              </div>
-            )
-          } else return null
+
+function authRenderSwitch(){
+  switch(authState) {
+    case 'signUp':
+      return(
+        <div>
+        <h1>Sign Up</h1>
+        <input
+          name="password"
+          type="password"
+          onChange={onChange}
+        />
+        <input
+          name="email"
+          onChange={onChange}
+        />
+        <button onClick={signUp}>Sign Up</button>
+      </div>
+      );
+    case 'confirmSignUp':
+      return (
+        <div>
+          <h1>Confirm Sign Up</h1>
+          <input
+            name="email"
+            onChange={onChange}
+          />
+          <input
+            name="verificationCode"
+            onChange={onChange}
+          />
+          <button onClick={confirmSignUp}>Confirm Sign Up</button>
+        </div>
+      );
+    case 'signIn':
+      return (
+        <div>
+          <h1>Sign In</h1>
+            <input
+              name="email"
+              onChange={onChange}
+            />
+            <input
+              name="password"
+              onChange={onChange}
+            />
+            <button onClick={signIn}>Sign In</button>
+          </div>
+        );
+      default:
+        return null
+  }
+}
+
+
+
+  return(
+    <IonCard>
+      {authRenderSwitch()}
+    </IonCard>
+  )
     }
 
 
