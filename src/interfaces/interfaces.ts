@@ -4,3 +4,8 @@ export interface AuthenticationProps {
     setSignedIn: any
   }
 
+export interface ErrorToast {
+  show: boolean,
+  message: string
+}
+

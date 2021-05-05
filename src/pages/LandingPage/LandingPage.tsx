@@ -14,7 +14,7 @@ function LandingPage({authState, setAuthState, setSignedIn}:AuthenticationProps)
             <div className='logoContainer'>
                 <IonIcon src={logo} className='logo'></IonIcon>
             </div>
-            <h1 className='title'>Coin<br/>Butler</h1>
+            <h1 className='title'>COIN<br/>BUTLER</h1>
             <div className='signUpInButtonContainer'>
                 <div className='signUpButtonContainer'>
                     <IonButton onClick={()=>setAuthState('signUp')} className='signUpButton' fill='clear'>SIGN UP</IonButton>

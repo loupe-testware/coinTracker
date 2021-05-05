@@ -1,9 +1,11 @@
+import {useState} from 'react'
+//Ion imports
+import { IonCard, IonToast } from '@ionic/react';
 // AWS imports for user authentication
-import { IonCard } from '@ionic/react';
-import Amplify, { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 
 // import awsconfig from './aws-imports'
-import { AuthenticationProps } from '../../interfaces/interfaces'
+import { AuthenticationProps, ErrorToast } from '../../interfaces/interfaces'
 
 // style import
 import './Authentication.css'
@@ -21,7 +23,8 @@ Auth.configure({
 
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
-let formInputState = {password: '', email: '', verificationCode: '' };
+let formInputState = {email: '', password: '', verificationCode: ''};
+const [showErrorToast, setShowErrorToast] = useState<ErrorToast>({show: false, message:''});
 
 /* onChange handler for form inputs */
 function onChange(e: any) {
@@ -57,7 +60,7 @@ async function signIn() {
     await Auth.signIn(formInputState.email, formInputState.password);
     /* Once the user successfully signs in, update the form state to show the signed in state */
     setAuthState("signedIn");
-  } catch (err) { console.log({ err }); }
+  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message}) }
 }
 
 function authRenderSwitch(){
@@ -84,7 +87,7 @@ function authRenderSwitch(){
         <div className='authContainer'>
           <input
             name="email"
-          placeholder="email"
+            placeholder="email"
             onChange={onChange}
           />
           <input
@@ -100,16 +103,16 @@ function authRenderSwitch(){
         <div className='authContainer'>
             <input
               name="email"
-          placeholder="email"
-
+              placeholder="email"
               onChange={onChange}
             />
             <input
               name="password"
+              type="password"
               placeholder="password"
               onChange={onChange}
             />
-            <button onClick={signIn}>Sign In</button>
+            <button onClick={signIn}>SIGN IN</button>
           </div>
         );
       default:
@@ -122,6 +125,13 @@ function authRenderSwitch(){
       <IonCard className='authCard'>
       <h1 className='authTitle'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
+      <IonToast
+         isOpen={showErrorToast.show}
+         onDidDismiss={() => setShowErrorToast({...showErrorToast, show: false})}
+         message={showErrorToast.message}
+         duration={2000}
+         color='danger'
+      />
       </IonCard>
    </div>
   )
