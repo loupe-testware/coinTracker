@@ -26,7 +26,10 @@ function LandingPage({authState, setAuthState, setSignedIn}:AuthenticationProps)
         {authState === 'landingPage' ? 
         null 
     :
+    <>
+    <div className='blur'> </div>
     <Authentication authState={authState} setAuthState={setAuthState} setSignedIn={setSignedIn}/>
+    </>
     }
     </div>
     )

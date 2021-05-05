@@ -1,5 +1,5 @@
 // AWS imports for user authentication
-import { IonCard, IonTitle } from '@ionic/react';
+import { IonCard } from '@ionic/react';
 import Amplify, { Auth } from 'aws-amplify'
 
 // import awsconfig from './aws-imports'
@@ -103,12 +103,13 @@ function authRenderSwitch(){
 
 
 
-  return(<>
+  return(
+  <div className='backgroundFilter'>
       <IonCard className='authCard'>
-      <h1 className='title'>COIN <br/> BUTLER</h1>
+      <h1 className='authTitle'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
       </IonCard>
-   </>
+   </div>
   )
     }
 

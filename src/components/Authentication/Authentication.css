@@ -3,14 +3,19 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-53.5%, -50%);
   height: 50%;
   text-align: center;
   border-radius: 25px;
 }
+.backgroundFilter {
+  height: 100%;
+  backdrop-filter: blue(4px);
+}
 
-.title {
+.authTitle {
   color: var(--ion-color-primary);
+  font-size: 2rem;
 }
 .authContainer {
   display: inline-flex;
