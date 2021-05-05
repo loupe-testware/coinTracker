@@ -48,7 +48,7 @@ const [authState, setAuthState] = useState<string>('landingPage')
 
 return(
 <IonApp>{ authState === 'landingPage' ? 
-    <LandingPage/>
+    <LandingPage setAuthState={setAuthState}/>
   :
     <Authentication authState={authState} setAuthState={setAuthState}/> 
     }
