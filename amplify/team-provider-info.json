@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cointracker-dev-154506-authRole",
+      "UnauthRoleArn": "arn:aws:iam::594351857074:role/amplify-cointracker-dev-154506-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::594351857074:role/amplify-cointracker-dev-154506-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-cointracker-dev-154506-deployment",
+      "UnauthRoleName": "amplify-cointracker-dev-154506-unauthRole",
+      "StackName": "amplify-cointracker-dev-154506",
+      "StackId": "arn:aws:cloudformation:eu-west-2:594351857074:stack/amplify-cointracker-dev-154506/7c9a7a00-adb0-11eb-b973-0a186d27a17c",
+      "AmplifyAppId": "d3s5e49fz5cuh5"
+    },
+    "categories": {
+      "auth": {
+        "cointrackerfa335c4a": {
+          "userPoolId": "eu-west-2_4Pj8Mxnu0",
+          "userPoolName": "compUser",
+          "webClientId": "1ou8iavu98g9pp7cbuk5stb60i",
+          "nativeClientId": "4tqollgk1lven1qvd8mj77q3h8"
+        }
+      }
+    }
+  }
+}

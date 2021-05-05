@@ -9,7 +9,15 @@ import { AuthenticationProps } from '../../interfaces/interfaces'
 import './Authentication.css'
 
 // You can get the current config object
-const currentConfig = Auth.configure();
+Auth.configure({
+  aws_project_region: "eu-west-2",
+  // aws_cognito_identity_pool_id:
+  //   "eu-west-2:664d92a9-e263-458d-8302-9f8aa292ac2c",
+  aws_cognito_region: "eu-west-2",
+  aws_user_pools_id: "eu-west-2_4Pj8Mxnu0",
+  aws_user_pools_web_client_id: "1ou8iavu98g9pp7cbuk5stb60i",
+  oauth: {}
+});
 
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
