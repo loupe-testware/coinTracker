@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
-  IonContent,
   IonIcon,
-  IonItem,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
@@ -17,6 +15,7 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
+import { Auth } from 'aws-amplify'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -43,7 +42,16 @@ import LandingPage from './pages/LandingPage/LandingPage'
 
 const App: React.FC = () => {
 //Create formState to handle the users authentication path
-const [authState, setAuthState] = useState<string>('landingPage')
+const [authState, setAuthState] = useState<string>('')
+
+async function isUserSignedIn(){
+  const userCredentials = await Auth.currentUserCredentials()
+  if (userCredentials.authenticated){
+    setAuthState('signedIn')
+  }
+}
+isUserSignedIn()
+
 
 return(
 <IonApp>

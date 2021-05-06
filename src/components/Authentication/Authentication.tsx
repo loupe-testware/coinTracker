@@ -125,8 +125,7 @@ function authRenderSwitch(){
             <button onClick={signIn}>SIGN IN</button>
           </div>
         );
-      default: setAuthState('landingPage')
-        
+      default: setAuthState('landingPage')  
   }
 }
 

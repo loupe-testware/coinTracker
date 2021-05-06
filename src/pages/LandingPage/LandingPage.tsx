@@ -28,7 +28,7 @@ function LandingPage({authState, setAuthState}:AuthenticationProps){
     :
     <>
     <div className='blur' onClick={()=>setAuthState('landingPage')}> </div>
-    <Authentication authState={authState} setAuthState={setAuthState}/>
+        <Authentication authState={authState} setAuthState={setAuthState}/>
     </>
     }
     </div>
