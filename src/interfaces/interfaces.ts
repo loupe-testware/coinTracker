@@ -9,3 +9,8 @@ export interface ErrorToast {
   message: string
 }
 
+export interface formInputState {
+  email: string,
+  password: string,
+  verificationCode: string
+}

@@ -1,27 +1,45 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 //Ion imports
 import { IonCard, IonToast } from '@ionic/react';
 // AWS imports for user authentication
-import { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
 
 // import awsconfig from './aws-imports'
-import { AuthenticationProps, ErrorToast } from '../../interfaces/interfaces'
+import  awsmobile  from '../../aws-exports.js';
+
+import { AuthenticationProps, ErrorToast } from '../../interfaces/interfaces';
 
 // style import
-import './Authentication.css'
+import './Authentication.css';
 
 // You can get the current config object
-Auth.configure();
+Auth.configure(awsmobile);
 
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
-let formInputState = {email: '', password: '', verificationCode: ''};
+const [formInputState, setFormInputState] = useState({email: '', password: '', verificationCode: ''})
 const [showErrorToast, setShowErrorToast] = useState<ErrorToast>({show: false, message:''});
 
 /* onChange handler for form inputs */
 function onChange(e: any) {
-  formInputState = { ...formInputState, [e.target.name]: e.target.value };
+  setFormInputState({ ...formInputState, [e.target.name]: e.target.value })
+  console.log(formInputState);
 }
+
+function showForm(){
+  console.log({
+    username: formInputState.email,
+    password: formInputState.password,
+    attributes: {
+      email: formInputState.email
+    }});
+  
+}
+
+useEffect(()=>{
+console.log(formInputState);
+},[formInputState]);
+
 
 /* Sign up function */
 async function signUp() {
@@ -33,7 +51,7 @@ async function signUp() {
         email: formInputState.email
       }});
     /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA */
-    setAuthState("confirmSignUp");
+    // setAuthState("confirmSignUp");
   } catch (err) { console.log({ err }); }
 }
 
@@ -117,6 +135,7 @@ function authRenderSwitch(){
       <IonCard className='authCard'>
       <h1 className='authTitle'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
+      <button onClick={()=>showForm()}></button>
       <IonToast
          isOpen={showErrorToast.show}
          onDidDismiss={() => setShowErrorToast({...showErrorToast, show: false})}
