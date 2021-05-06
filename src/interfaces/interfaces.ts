@@ -5,7 +5,9 @@ export interface AuthenticationProps {
   }
 
 export interface ErrorToast {
-  show: boolean,
+  errorToast: boolean,
+  signUpSuccessToast: boolean,
+  authSuccessToast: boolean,
   message: string
 }
 

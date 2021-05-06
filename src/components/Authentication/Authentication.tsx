@@ -21,7 +21,12 @@ Auth.configure(awsmobile);
 
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
 const [formInputState, setFormInputState] = useState<formInputState>({email: '', password: '', verificationCode: ''})
-const [showErrorToast, setShowErrorToast] = useState<ErrorToast>({show: false, message:''});
+const [authToast, setAuthToast] = useState<ErrorToast>({
+  errorToast: false,
+  signUpSuccessToast: false,
+  authSuccessToast:false,
+  message: ''
+});
 
 /* onChange handler for form inputs */
 function onChange(e: any) {
@@ -39,8 +44,9 @@ async function signUp() {
       }});
     /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA  and clear the relevant inputs*/
     setFormInputState({...formInputState, password: '', verificationCode: ''})
+    setAuthToast({...authToast, signUpSuccessToast: true, message: 'Please check your email to get verification code'})
     setAuthState("confirmSignUp");
-  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
+  } catch (err) { console.log({ err }); setAuthToast({...authToast, errorToast: true, message: err.message})}
 }
 
 /* Confirm sign up function for MFA */
@@ -48,8 +54,9 @@ async function confirmSignUp() {
   try {
     await Auth.confirmSignUp(formInputState.email, formInputState.verificationCode);
     /* Once the user successfully confirms their account, update form state to show the sign in form*/
+    setAuthToast({...authToast, authSuccessToast: true, message: 'Success! please sign in'})
     setAuthState("signIn");
-  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
+  } catch (err) { console.log({ err }); setAuthToast({...authToast, errorToast: true, message: err.message})}
 }
 
 /* Sign in function */
@@ -59,8 +66,9 @@ async function signIn() {
     /* Once the user successfully signs in, update the form state to show the signed in state*/
     
     setAuthState("signedIn");
-  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
-}
+  } catch (err) { console.log({ err }); setAuthToast({...authToast, errorToast: true, message: err.message})}
+  }
+
 
 function authRenderSwitch(){
   switch(authState) {
@@ -131,11 +139,25 @@ function authRenderSwitch(){
       <h1 className='authTitle'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
       <IonToast
-         isOpen={showErrorToast.show}
-         onDidDismiss={() => setShowErrorToast({...showErrorToast, show: false})}
-         message={showErrorToast.message}
-         duration={2000}
+         isOpen={authToast.errorToast}
+         onDidDismiss={() => setAuthToast({...authToast, errorToast: false})}
+         message={authToast.message}
+         duration={3000}
          color='danger'
+      />
+      <IonToast
+         isOpen={authToast.signUpSuccessToast}
+         onDidDismiss={() => setAuthToast({...authToast, signUpSuccessToast: false})}
+         message={authToast.message}
+         duration={3000}
+         color='success'
+      />
+      <IonToast
+         isOpen={authToast.authSuccessToast}
+         onDidDismiss={() => setAuthToast({...authToast, authSuccessToast: false})}
+         message={authToast.message}
+         duration={3000}
+         color='success'
       />
       </IonCard>
    </div>
