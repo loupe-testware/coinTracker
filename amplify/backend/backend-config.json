@@ -1,8 +1,7 @@
 {
   "auth": {
-    "cointrackerfa335c4a": {
+    "cointracker747c7ca0": {
       "service": "Cognito",
-      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false

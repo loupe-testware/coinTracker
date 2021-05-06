@@ -13,12 +13,7 @@
     },
     "categories": {
       "auth": {
-        "cointrackerfa335c4a": {
-          "userPoolId": "eu-west-2_4Pj8Mxnu0",
-          "userPoolName": "compUser",
-          "webClientId": "1ou8iavu98g9pp7cbuk5stb60i",
-          "nativeClientId": "4tqollgk1lven1qvd8mj77q3h8"
-        }
+        "cointracker747c7ca0": {}
       }
     }
   }
