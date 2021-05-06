@@ -12,34 +12,21 @@ import { AuthenticationProps, ErrorToast } from '../../interfaces/interfaces';
 // style import
 import './Authentication.css';
 
-// You can get the current config object
+
+//Interface Imports
+import {formInputState} from '../../interfaces/interfaces'
+
+// Configure Userpool for Auth
 Auth.configure(awsmobile);
 
-
 function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
-const [formInputState, setFormInputState] = useState({email: '', password: '', verificationCode: ''})
+const [formInputState, setFormInputState] = useState<formInputState>({email: '', password: '', verificationCode: ''})
 const [showErrorToast, setShowErrorToast] = useState<ErrorToast>({show: false, message:''});
 
 /* onChange handler for form inputs */
 function onChange(e: any) {
   setFormInputState({ ...formInputState, [e.target.name]: e.target.value })
-  console.log(formInputState);
 }
-
-function showForm(){
-  console.log({
-    username: formInputState.email,
-    password: formInputState.password,
-    attributes: {
-      email: formInputState.email
-    }});
-  
-}
-
-useEffect(()=>{
-console.log(formInputState);
-},[formInputState]);
-
 
 /* Sign up function */
 async function signUp() {
@@ -50,9 +37,10 @@ async function signUp() {
       attributes: {
         email: formInputState.email
       }});
-    /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA */
-    // setAuthState("confirmSignUp");
-  } catch (err) { console.log({ err }); }
+    /* Once the user successfully signs up, update form state to show the confirm sign up form for MFA  and clear the relevant inputs*/
+    setFormInputState({...formInputState, password: '', verificationCode: ''})
+    setAuthState("confirmSignUp");
+  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
 }
 
 /* Confirm sign up function for MFA */
@@ -61,16 +49,17 @@ async function confirmSignUp() {
     await Auth.confirmSignUp(formInputState.email, formInputState.verificationCode);
     /* Once the user successfully confirms their account, update form state to show the sign in form*/
     setAuthState("signIn");
-  } catch (err) { console.log({ err }); }
+  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
 }
 
 /* Sign in function */
 async function signIn() {
   try {
     await Auth.signIn(formInputState.email, formInputState.password);
-    /* Once the user successfully signs in, update the form state to show the signed in state */
+    /* Once the user successfully signs in, update the form state to show the signed in state*/
+    
     setAuthState("signedIn");
-  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message}) }
+  } catch (err) { console.log({ err }); setShowErrorToast({show: true, message: err.message})}
 }
 
 function authRenderSwitch(){
@@ -87,6 +76,7 @@ function authRenderSwitch(){
           placeholder="password"
           name="password"
           type="password"
+          value={formInputState.password}
           onChange={onChange}
         />
         <button onClick={signUp}>SIGN UP</button>
@@ -98,14 +88,16 @@ function authRenderSwitch(){
           <input
             name="email"
             placeholder="email"
+            value={formInputState.email}
             onChange={onChange}
           />
           <input
             name="verificationCode"
             placeholder="code"
+            value={formInputState.verificationCode}
             onChange={onChange}
           />
-          <button onClick={confirmSignUp}>Confirm Sign Up</button>
+          <button onClick={confirmSignUp}>VERIFY EMAIL</button>
         </div>
       );
     case 'signIn':
@@ -119,6 +111,7 @@ function authRenderSwitch(){
             <input
               name="password"
               type="password"
+              value={formInputState.password}
               placeholder="password"
               onChange={onChange}
             />
@@ -126,7 +119,9 @@ function authRenderSwitch(){
           </div>
         );
       default:
-        return null
+        return (
+          <div>SIGNED IN!</div>
+        )
   }
 }
 
@@ -135,7 +130,6 @@ function authRenderSwitch(){
       <IonCard className='authCard'>
       <h1 className='authTitle'>COIN <br/> BUTLER</h1>
       {authRenderSwitch()}
-      <button onClick={()=>showForm()}></button>
       <IonToast
          isOpen={showErrorToast.show}
          onDidDismiss={() => setShowErrorToast({...showErrorToast, show: false})}
