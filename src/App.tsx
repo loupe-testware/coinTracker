@@ -34,6 +34,8 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+import { Auth } from 'aws-amplify'
+
 /* Theme variables */
 import './theme/variables.css';
 
@@ -44,11 +46,11 @@ import LandingPage from './pages/LandingPage/LandingPage'
 const App: React.FC = () => {
 //Create formState to handle the users authentication path
 const [authState, setAuthState] = useState<string>('landingPage')
-const [signedIn, setSignedIn] = useState<boolean>(false)
 
 return(
-<IonApp>{ !signedIn ? 
-    <LandingPage authState={authState} setAuthState={setAuthState} setSignedIn={setSignedIn}/>
+<IonApp>
+  { authState !== 'signedIn' ? 
+    <LandingPage authState={authState} setAuthState={setAuthState}/>
   :
    'APP' 
     }

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 //Ion imports
 import { IonCard, IonToast } from '@ionic/react';
 // AWS imports for user authentication
@@ -19,7 +19,7 @@ import {formInputState} from '../../interfaces/interfaces'
 // Configure Userpool for Auth
 Auth.configure(awsmobile);
 
-function Authentication({authState, setAuthState, setSignedIn}: AuthenticationProps){
+function Authentication({authState, setAuthState}: AuthenticationProps){
 const [formInputState, setFormInputState] = useState<formInputState>({email: '', password: '', verificationCode: ''})
 const [authToast, setAuthToast] = useState<ErrorToast>({
   errorToast: false,
@@ -64,7 +64,6 @@ async function signIn() {
   try {
     await Auth.signIn(formInputState.email, formInputState.password);
     /* Once the user successfully signs in, update the form state to show the signed in state*/
-    
     setAuthState("signedIn");
   } catch (err) { console.log({ err }); setAuthToast({...authToast, errorToast: true, message: err.message})}
   }
@@ -126,10 +125,8 @@ function authRenderSwitch(){
             <button onClick={signIn}>SIGN IN</button>
           </div>
         );
-      default:
-        return (
-          <div>SIGNED IN!</div>
-        )
+      default: setAuthState('landingPage')
+        
   }
 }
 

@@ -7,7 +7,7 @@ import { AuthenticationProps } from '../../interfaces/interfaces'
 
 import './LandingPage.css'
 
-function LandingPage({authState, setAuthState, setSignedIn}:AuthenticationProps){
+function LandingPage({authState, setAuthState}:AuthenticationProps){
 
  return (
      <div className='landingPageContainer'>
@@ -28,7 +28,7 @@ function LandingPage({authState, setAuthState, setSignedIn}:AuthenticationProps)
     :
     <>
     <div className='blur' onClick={()=>setAuthState('landingPage')}> </div>
-    <Authentication authState={authState} setAuthState={setAuthState} setSignedIn={setSignedIn}/>
+    <Authentication authState={authState} setAuthState={setAuthState}/>
     </>
     }
     </div>
