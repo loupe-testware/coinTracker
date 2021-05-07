@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -38,6 +38,7 @@ import './theme/variables.css';
 
 // Components
 import LandingPage from './pages/LandingPage/LandingPage'
+import Loading from './components/Loading/Loading'
 
 
 const App: React.FC = () => {
@@ -46,22 +47,28 @@ const [authState, setAuthState] = useState<string>('loading')
 
 async function isUserSignedIn(){
   const userCredentials = await Auth.currentUserCredentials()
+
   if (userCredentials.authenticated){
     setAuthState('signedIn')
-  }
+  } else if (authState !== 'signIn' && authState !== 'signUp'){
+    setAuthState('landingPage')
+  } 
 }
-isUserSignedIn()
+
+useEffect(()=>{
+  isUserSignedIn()
+},[authState])
 
 function appRender(){
   if(authState === 'loading'){
     return (
-      <div>LOADING</div>
+      <Loading/>
     )
   } else if (authState !== 'signedIn'){
     return (
       <LandingPage authState={authState} setAuthState={setAuthState}/>
     ) 
-  } else return(
+  } else return (
     <IonReactRouter>
     <IonTabs>
       <IonRouterOutlet>
