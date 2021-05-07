@@ -7,7 +7,7 @@ import { AuthenticationProps } from '../../interfaces/interfaces'
 
 import './LandingPage.css'
 
-function LandingPage({authState, setAuthState}:AuthenticationProps){
+const LandingPage: React.FC<AuthenticationProps> = ({authState, setAuthState}) => {
 
  return (
      <div className='landingPageContainer'>

@@ -1,0 +1,22 @@
+.loadingContainer {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-areas: "." "loadingTitle" "loadingGear" ".";
+  grid-template-rows: 1fr auto auto 1fr;
+  background-color: var(--ion-color-primary);
+}
+
+.loadingTitle {
+  grid-area: loadingTitle;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.loadingGear {
+  grid-area: loadingGear;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
