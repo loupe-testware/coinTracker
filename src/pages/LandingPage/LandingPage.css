@@ -1,0 +1,62 @@
+.landingPageContainer {
+  height: 100%;
+  display: grid;
+  grid-template-areas: "." "logo" "title" "." "buttons" ".";
+  grid-template-rows: 1fr auto auto 1fr auto 1fr;
+  background-color: var(--ion-color-primary);
+}
+
+.blur {
+  position: absolute;
+  backdrop-filter: blur(4px);
+  height: 100vh;
+  width: 100vw;
+}
+
+.logoContainer {
+  grid-area: logo;
+}
+
+.logo {
+  font-size: 128px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  grid-area: title;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+}
+
+.signUpInButtonContainer {
+  grid-area: buttons;
+  display: grid;
+  grid-template-areas: "signUp" "signIn";
+  justify-items: center;
+}
+
+.signUpButtonContainer {
+  grid-area: signUp;
+}
+
+.signInButtonContainer {
+  grid-area: signIn;
+}
+
+.signUpButton {
+  border-radius: 25px;
+  color: white;
+  border: white 1px solid;
+  width: 200px;
+}
+
+.signInButton {
+  background-color: white;
+  color: var(--ion-color-primary);
+  border-radius: 25px;
+  width: 200px;
+  border: white 1px solid;
+}

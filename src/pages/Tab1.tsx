@@ -1,6 +1,8 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
+
+import { Auth } from 'aws-amplify'
 
 const Tab1: React.FC = () => {
   return (
@@ -8,6 +10,16 @@ const Tab1: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Tab 1</IonTitle>
+          <IonButton color='white' onClick={async()=>{
+            try {
+              await Auth.signOut({
+                global: true
+              })
+              window.location.reload();
+            } catch (error){
+              console.log('error signing out: ', error);
+            }
+          }}>Sign Out</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
