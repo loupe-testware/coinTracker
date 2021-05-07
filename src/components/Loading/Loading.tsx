@@ -1,4 +1,4 @@
-import loadingGear from '../../assets/loadingGear.svg'
+import loadingGear from '../../assets/loadingSpinner.svg'
 
 import './Loading.css'
 

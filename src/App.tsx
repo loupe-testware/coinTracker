@@ -50,7 +50,7 @@ async function isUserSignedIn(){
 
   if (userCredentials.authenticated){
     setAuthState('signedIn')
-  } else if (authState !== 'signIn' && authState !== 'signUp'){
+  } else if (authState !== 'signIn' && authState !== 'signUp' && authState !== 'confirmSignUp'){
     setAuthState('landingPage')
   } 
 }
