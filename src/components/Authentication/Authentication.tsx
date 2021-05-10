@@ -11,7 +11,7 @@ import { AuthenticationProps, ErrorToast } from '../../interfaces/interfaces';
 
 // style import
 import './Authentication.css';
-
+import loadingSpinner from '../../assets/loadingSpinnerPrimary.svg'
 
 //Interface Imports
 import {formInputState} from '../../interfaces/interfaces'
@@ -27,6 +27,7 @@ const [authToast, setAuthToast] = useState<ErrorToast>({
   authSuccessToast:false,
   message: ''
 });
+const [loadingSpinnerShow, setLoadingSpinnerShow] = useState<boolean>(false)
 
 /* onChange handler for form inputs */
 function onChange(e: any) {
@@ -62,12 +63,17 @@ async function confirmSignUp() {
 /* Sign in function */
 async function signIn() {
   try {
+    loadingSpinnerControl(true)
     await Auth.signIn(formInputState.email, formInputState.password);
     /* Once the user successfully signs in, update the form state to show the signed in state*/
+    loadingSpinnerControl(false)
     setAuthState("signedIn");
   } catch (err) { console.log({ err }); setAuthToast({...authToast, errorToast: true, message: err.message})}
   }
 
+function loadingSpinnerControl(state: boolean){
+  setLoadingSpinnerShow(state)
+}
 
 function authRenderSwitch(){
   switch(authState) {
@@ -85,6 +91,11 @@ function authRenderSwitch(){
           type="password"
           value={formInputState.password}
           onChange={onChange}
+          onKeyDown={(e)=>{
+            if (e.key === 'Enter'){
+              signUp()
+            }
+          }}
         />
         <button onClick={signUp}>SIGN UP</button>
       </div>
@@ -103,6 +114,11 @@ function authRenderSwitch(){
             placeholder="code"
             value={formInputState.verificationCode}
             onChange={onChange}
+            onKeyDown={(e)=>{
+              if (e.key === 'Enter'){
+                confirmSignUp()
+              }
+            }}
           />
           <button onClick={confirmSignUp}>VERIFY EMAIL</button>
         </div>
@@ -121,8 +137,14 @@ function authRenderSwitch(){
               value={formInputState.password}
               placeholder="password"
               onChange={onChange}
+              onKeyDown={(e)=>{
+                if (e.key === 'Enter'){
+                  signIn()
+                }
+              }}
             />
-            <button onClick={signIn}>SIGN IN</button>
+            <button disabled={loadingSpinnerShow} onClick={signIn} >SIGN IN</button>
+            {loadingSpinnerShow ? <img className='signInLoadingSpinner' src={loadingSpinner} alt='loading spinner'/> : null}
           </div>
         );
       default: setAuthState('landingPage')  
@@ -137,7 +159,7 @@ function authRenderSwitch(){
       <IonToast
          isOpen={authToast.errorToast}
          onDidDismiss={() => setAuthToast({...authToast, errorToast: false})}
-         message={authToast.message}
+         message={authToast.message === "Custom auth lambda trigger is not configured for the user pool." ? "There was an error when logging in, please try again" : authToast.message}
          duration={3000}
          color='danger'
       />
