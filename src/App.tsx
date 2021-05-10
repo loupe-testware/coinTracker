@@ -3,15 +3,16 @@ import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
-  IonLabel,
+  IonButton,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonLabel
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
+import { ellipse, square, settingsSharp, wallet, analyticsSharp } from 'ionicons/icons';
+import Settings from './pages/Settings';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
@@ -35,11 +36,11 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './app.css'
 
 // Components
 import LandingPage from './pages/LandingPage/LandingPage'
 import Loading from './components/Loading/Loading'
-
 
 const App: React.FC = () => {
 //Create formState to handle the users authentication path
@@ -69,38 +70,48 @@ function appRender(){
       <LandingPage authState={authState} setAuthState={setAuthState}/>
     ) 
   } else return (
-    <IonReactRouter>
-    <IonTabs>
-      <IonRouterOutlet>
-        <Route exact path="/tab1">
-          <Tab1 />
-        </Route>
-        <Route exact path="/tab2">
-          <Tab2 />
-        </Route>
-        <Route path="/tab3">
-          <Tab3 />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/tab1" />
-        </Route>
-      </IonRouterOutlet>
-      <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href="/tab1">
-          <IonIcon icon={triangle} />
-          <IonLabel>Tab 1</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="tab2" href="/tab2">
-          <IonIcon icon={ellipse} />
-          <IonLabel>Tab 2</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="tab3" href="/tab3">
-          <IonIcon icon={square} />
-          <IonLabel>Tab 3</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
-    </IonTabs>
-  </IonReactRouter>
+      <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path="/settings">
+            <Settings />
+          </Route>
+          <Route exact path="/portfolio">
+            <Tab2 />
+          </Route>
+          <Route path="/markets">
+            <Tab3 />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/portfolio" />
+          </Route>
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom" >
+          <IonTabButton tab="settings" href="/settings">
+              <IonIcon icon={settingsSharp}/>
+              <IonLabel>Settings</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="portfolio" href="/portfolio">
+            <IonIcon icon={wallet} />
+            <IonLabel>Portfolio</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="markets" href="/markets">
+            <IonIcon icon={analyticsSharp} />
+            <IonLabel>Markets</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+        <IonButton color='white' onClick={async()=>{
+            try {
+              await Auth.signOut({
+                global: true
+              })
+              window.location.reload();
+            } catch (error){
+              console.log('error signing out: ', error);
+            }
+          }}>Sign Out</IonButton>
+      </IonTabs>
+    </IonReactRouter>
   )
 }
 
