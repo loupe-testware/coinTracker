@@ -21,7 +21,6 @@ const coinsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-
     builder.addCase(getCoins.pending, (state) => {
       state.status = "loading";
     })
@@ -32,17 +31,6 @@ const coinsSlice = createSlice({
     builder.addCase(getCoins.rejected, (state) => {
       state.status = "failed";
     })
-
-    // [getCoins.pending]: (state) => {
-    //   state.status = "loading";
-    // },
-    // [getCoins.fulfilled]: (state, payload) => {
-    //   state.list = payload;
-    //   state.status = "success";
-    // },
-    // [getCoins.rejected]: (state) => {
-    //   state.status = "failed";
-    // },
   },
 });
 
