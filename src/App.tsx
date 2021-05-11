@@ -11,10 +11,14 @@ import {
   IonLabel
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, settingsSharp, wallet, analyticsSharp } from 'ionicons/icons';
+import { settingsSharp, wallet, analyticsSharp } from 'ionicons/icons';
 import Settings from './pages/Settings';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+
+//Redux
+import { useDispatch } from 'react-redux'
+import { getCoins } from './redux/coinSlice'
 
 import { Auth } from 'aws-amplify'
 
@@ -46,11 +50,15 @@ const App: React.FC = () => {
 //Create formState to handle the users authentication path
 const [authState, setAuthState] = useState<string>('loading')
 
+//Dispatch for redux
+const dispatch = useDispatch()
+
+//function to check the user is signed 
 async function isUserSignedIn(){
   const userCredentials = await Auth.currentUserCredentials()
-
   if (userCredentials.authenticated){
     setAuthState('signedIn')
+    dispatch(getCoins())
   } else if (authState !== 'signIn' && authState !== 'signUp' && authState !== 'confirmSignUp'){
     setAuthState('landingPage')
   } 
