@@ -1,10 +1,10 @@
 .marketsContainer {
-  height: 100vh;
   width: 100vw;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .searchInputContainer {
-  align-items: center;
   padding: 20px;
 }
 
@@ -12,4 +12,45 @@
   background-color: var(--ion-color-light);
   border-radius: 15px;
   height: 50px;
+}
+
+.coinsMarketDataContainer {
+  background-color: var(--ion-color-light);
+  margin: 20px;
+  border-radius: 15px;
+  height: auto;
+  padding: 10px;
+}
+
+.coinContainer {
+  display: grid;
+  grid-template-areas: "coinMarketCapRank coinLogo coinSymbol coinPrice addToPortfolio" "coinMarketCapRank coinLogo coinName coinPercentage addToPortfolio";
+  grid-template-columns: 10px 36px 2fr 2fr 1fr;
+  grid-template-rows: 72px;
+}
+
+.coinMarketCapRank {
+  grid-area: coinMarketCapRank;
+}
+
+.coinLogo {
+  grid-area: coinLogo;
+  height: 36px;
+  width: 36px;
+}
+
+.coinSymbol {
+  grid-area: coinSymbol;
+}
+.coinName {
+  grid-area: coinName;
+}
+.coinPrice {
+  grid-area: coinPrice;
+}
+.coinPercentage {
+  grid-area: coinPercentage;
+}
+.addToPortfolio {
+  grid-area: addToPortfolio;
 }
