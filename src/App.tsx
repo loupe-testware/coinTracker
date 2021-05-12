@@ -14,7 +14,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { settingsSharp, wallet, analyticsSharp } from 'ionicons/icons';
 import Settings from './pages/Settings';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import Markets from './pages/Markets';
 
 //Redux
 import { useDispatch } from 'react-redux'
@@ -88,7 +88,7 @@ function appRender(){
             <Tab2 />
           </Route>
           <Route path="/markets">
-            <Tab3 />
+            <Markets />
           </Route>
           <Route exact path="/">
             <Redirect to="/portfolio" />

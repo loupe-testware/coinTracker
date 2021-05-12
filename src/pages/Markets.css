@@ -1,0 +1,15 @@
+.marketsContainer {
+  height: 100vh;
+  width: 100vw;
+}
+
+.searchInputContainer {
+  align-items: center;
+  padding: 20px;
+}
+
+.searchInput {
+  background-color: var(--ion-color-light);
+  border-radius: 15px;
+  height: 50px;
+}
