@@ -36,15 +36,15 @@ const Markets: React.FC = () => {
                     {coin.name}
                   </div>
                   <div className='coinSymbol'>
-                    {coin.symbol}
+                    {coin.symbol.toUpperCase()}
                   </div>
                   <div className='coinPrice'>
                     ${coin.current_price}
                   </div>
-                  <div style={{color: coin_price_change_percentage_24h < 0 ? 'red' : 'green'}} className='coinPercentage'>
+                  <div style={{color: coin_price_change_percentage_24h < 0 ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'}} className='coinPercentage'>
                     {coin_price_change_percentage_24h}%
                   </div>
-                  <button className='addToPortfolio'>
+                  <button className='addToPortfolioButton'>
                     +
                   </button>
                 </div>
