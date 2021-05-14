@@ -28,10 +28,10 @@ const Markets: React.FC = () => {
   }
 
   return (
-    <IonPage>
-      <IonContent className='marketsContentContainer' fullscreen={true}>
-      <IonRefresher className='marketsRefresher' slot='fixed' onIonRefresh={onRefresh} >
-        <IonRefresherContent className='marketsRefresherContent'>
+    <IonPage className='marketsPage'>
+      <IonContent className='marketsContentContainer'>
+      {/* <IonRefresher className='marketsRefresher' slot='fixed' onIonRefresh={onRefresh} >
+        <IonRefresherContent className='marketsRefresherContent'> */}
             <div className='searchInputContainer'>
               <IonInput className='searchInput' value={searchValue} placeholder='Search coins...' onIonChange={(e)=>{setSearchValue(e.detail.value!)}}></IonInput>
             </div>
@@ -66,8 +66,8 @@ const Markets: React.FC = () => {
                 })
               }
             </div>
-        </IonRefresherContent>
-      </IonRefresher>
+              {/* </IonRefresherContent>
+            </IonRefresher> */}
       </IonContent>
     </IonPage>
   );
