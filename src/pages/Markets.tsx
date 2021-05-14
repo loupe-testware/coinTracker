@@ -12,7 +12,6 @@ import './Markets.css';
 
 const Markets: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('')
-//tech debt: fix the any state to match the payload schema
   const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
 
   const dispatch = useDispatch()
@@ -35,39 +34,47 @@ const Markets: React.FC = () => {
         <IonRefresherContent className='marketsRefresherContent'>
         </IonRefresherContent>
       </IonRefresher>
-            <div className='searchInputContainer'>
-              <IonInput className='searchInput' value={searchValue} placeholder='Search coins...' onIonChange={(e)=>{setSearchValue(e.detail.value!)}}></IonInput>
+        <div className='searchInputContainer'>
+          <IonInput className='searchInput' value={searchValue} placeholder='Search coins...' onIonChange={(e)=>{setSearchValue(e.detail.value!)}} clearInput></IonInput>
+        </div>
+        <div className='marketTitleContainers'>
+          <div className='marketTitleRank'>Rank</div><div className='marketTitleName'>Name</div><div className='marketTitlePrice'>Price</div><div className='marketTitleAdd'>Add</div>
+        </div>
+        <div className='coinsMarketDataContainer'>
+          {
+            filteredPayload?.map((coin: coinInterface, x: number)=>{
+              const coin_price_change_percentage_24h = Math.round((coin.price_change_percentage_24h + Number.EPSILON) * 100) / 100 
+              return(
+                <div key={x} className='coinContainer'>
+                  <div className='coinMarketCapRank'>
+                    {coin.market_cap_rank}
+                  </div>
+                    <img className='coinLogo' src={coin.image} alt='coin logo'/>
+                  <div className='coinName'>
+                    {coin.name}
+                  </div>
+                  <div className='coinSymbol'>
+                    {coin.symbol.toUpperCase()}
+                  </div>
+                  <div className='coinPrice'>
+                    ${coin.current_price}
+                  </div>
+                  <div style={{color: coin_price_change_percentage_24h < 0 ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'}} className='coinPercentage'>
+                    {coin_price_change_percentage_24h}%
+                  </div>
+                  <button className='addToPortfolioButton'>
+                    +
+                  </button>
+                </div>
+              )
+            })
+          }
+          {
+            filteredPayload.length !== 0 ? null : <div>
+              NO COINS FOUND
             </div>
-            <div className='coinsMarketDataContainer'>
-              {
-                filteredPayload?.map((coin: coinInterface, x: number)=>{
-                  const coin_price_change_percentage_24h = Math.round((coin.price_change_percentage_24h + Number.EPSILON) * 100) / 100 
-                  return(
-                    <div key={x} className='coinContainer'>
-                      <div className='coinMarketCapRank'>
-                        {coin.market_cap_rank}
-                      </div>
-                        <img className='coinLogo' src={coin.image} alt='coin logo'/>
-                      <div className='coinName'>
-                        {coin.name}
-                      </div>
-                      <div className='coinSymbol'>
-                        {coin.symbol.toUpperCase()}
-                      </div>
-                      <div className='coinPrice'>
-                        ${coin.current_price}
-                      </div>
-                      <div style={{color: coin_price_change_percentage_24h < 0 ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'}} className='coinPercentage'>
-                        {coin_price_change_percentage_24h}%
-                      </div>
-                      <button className='addToPortfolioButton'>
-                        +
-                      </button>
-                    </div>
-                  )
-                })
-              }
-            </div>
+          }
+        </div>
       </IonContent>
     </IonPage>
   );

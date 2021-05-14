@@ -12,6 +12,33 @@
   height: 50px;
 }
 
+.marketTitleContainers {
+  display: grid;
+  padding-left: 20px;
+  padding-right: 20px;
+  grid-template-areas: "marketTitleRank . marketTitleName marketTitlePrice marketTitleAdd";
+  grid-template-columns: 40px 70px 2fr 2fr 1fr;
+}
+
+.marketTitleRank {
+  grid-area: marketTitleRank;
+}
+
+.marketTitleName {
+  grid-area: marketTitleName;
+  align-self: end;
+}
+
+.marketTitlePrice {
+  grid-area: marketTitlePrice;
+  align-self: end;
+}
+
+.marketTitleAdd {
+  grid-area: marketTitleAdd;
+  align-self: end;
+}
+
 .coinsMarketDataContainer {
   background-color: var(--ion-color-light);
   margin: 20px;
