@@ -1,7 +1,21 @@
-.marketsContainer {
-  width: 100vw;
+ion-refresher {
+  z-index: 10 !important;
+  height: 400px;
+}
+
+.marketsContentContainer {
+  height: auto;
+  width: 100%;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.marketsRefresherContent {
+  height: auto;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: var(--ion-color-primary);
 }
 
 .searchInputContainer {
