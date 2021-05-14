@@ -3,30 +3,29 @@ import { useState } from 'react'
 import { IonContent, IonInput, IonPage, IonRefresher, IonRefresherContent } from '@ionic/react';
 import { RefresherEventDetail } from '@ionic/core'
 
+import { coinInterface, coinsStoreInterface } from '../interfaces/interfaces'
 
-import './Markets.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {getCoins} from '../redux/coinSlice'
+import './Markets.css';
 
 
 const Markets: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('')
-//tech debt: fix the any state
-  const { payload } = useSelector((state: any) => state.coins.list)
-  const dispatch = useDispatch()
+//tech debt: fix the any state to match the payload schema
+  const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
 
-  const filteredPayload = payload?.filter((coin: any)=>{
+  const dispatch = useDispatch()
+  
+  const filteredPayload = payload?.filter((coin: coinInterface) => {
      if (coin.name.toLowerCase().includes(searchValue.toLowerCase()) || coin.symbol.toLowerCase().includes(searchValue.toLowerCase())){
       return coin
     }
   })
-
+//function to be fired on refresh to update the redux store with up to date coins info
   function onRefresh(event: CustomEvent<RefresherEventDetail>){
-    console.log('Begin async operation');
     dispatch(getCoins())
     event.detail.complete();
-    console.log('Async operation has ended');
-
   }
 
   return (
@@ -40,9 +39,8 @@ const Markets: React.FC = () => {
               <IonInput className='searchInput' value={searchValue} placeholder='Search coins...' onIonChange={(e)=>{setSearchValue(e.detail.value!)}}></IonInput>
             </div>
             <div className='coinsMarketDataContainer'>
-              {/* payload interface */}
               {
-                filteredPayload?.map((coin: any, x: number)=>{
+                filteredPayload?.map((coin: coinInterface, x: number)=>{
                   const coin_price_change_percentage_24h = Math.round((coin.price_change_percentage_24h + Number.EPSILON) * 100) / 100 
                   return(
                     <div key={x} className='coinContainer'>
