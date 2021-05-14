@@ -11,8 +11,11 @@ const Markets: React.FC = () => {
 //tech debt: fix the any state
   const { payload } = useSelector((state: any) => state.coins.list)
 
-  console.log(payload);
-  
+  const filteredPayload = payload?.filter((coin: any)=>{
+     if (coin.name.toLowerCase().includes(searchValue.toLowerCase()) || coin.symbol.toLowerCase().includes(searchValue.toLowerCase())){
+      return coin
+    }
+  })
 
   return (
     <IonPage>
@@ -23,11 +26,11 @@ const Markets: React.FC = () => {
         <div className='coinsMarketDataContainer'>
   {/* payload interface */}
           {
-            payload?.map((coin: any, x: number)=>{
+            filteredPayload?.map((coin: any, x: number)=>{
               const coin_price_change_percentage_24h = Math.round((coin.price_change_percentage_24h + Number.EPSILON) * 100) / 100 
 
               return(
-                <div className='coinContainer'>
+                <div key={x} className='coinContainer'>
                   <div className='coinMarketCapRank'>
                     {coin.market_cap_rank}
                   </div>
