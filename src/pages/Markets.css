@@ -2,19 +2,14 @@
   --background: var(--ion-color-primary);
 }
 
-/* .marketsRefresherContent {
+.marketsRefresherContent {
   height: auto;
   width: 100%;
-  overflow: scroll;
-  overflow-x: hidden;
   background-color: var(--ion-color-primary);
-} */
+}
 
-/* .marketsContainer {
-  width: 100vw;
-  overflow: scroll;
-  overflow-x: hidden;
-} */
+.marketsRefresher {
+}
 
 .searchInputContainer {
   padding: 20px;

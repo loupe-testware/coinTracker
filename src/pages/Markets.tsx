@@ -5,12 +5,15 @@ import { RefresherEventDetail } from '@ionic/core'
 
 
 import './Markets.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {getCoins} from '../redux/coinSlice'
+
 
 const Markets: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('')
 //tech debt: fix the any state
   const { payload } = useSelector((state: any) => state.coins.list)
+  const dispatch = useDispatch()
 
   const filteredPayload = payload?.filter((coin: any)=>{
      if (coin.name.toLowerCase().includes(searchValue.toLowerCase()) || coin.symbol.toLowerCase().includes(searchValue.toLowerCase())){
@@ -20,18 +23,19 @@ const Markets: React.FC = () => {
 
   function onRefresh(event: CustomEvent<RefresherEventDetail>){
     console.log('Begin async operation');
+    dispatch(getCoins())
+    event.detail.complete();
+    console.log('Async operation has ended');
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.detail.complete();
-    }, 2000);
   }
 
   return (
     <IonPage className='marketsPage'>
       <IonContent className='marketsContentContainer'>
-      {/* <IonRefresher className='marketsRefresher' slot='fixed' onIonRefresh={onRefresh} >
-        <IonRefresherContent className='marketsRefresherContent'> */}
+      <IonRefresher className='marketsRefresher' slot='fixed' onIonRefresh={onRefresh} >
+        <IonRefresherContent className='marketsRefresherContent'>
+        </IonRefresherContent>
+      </IonRefresher>
             <div className='searchInputContainer'>
               <IonInput className='searchInput' value={searchValue} placeholder='Search coins...' onIonChange={(e)=>{setSearchValue(e.detail.value!)}}></IonInput>
             </div>
@@ -66,8 +70,6 @@ const Markets: React.FC = () => {
                 })
               }
             </div>
-              {/* </IonRefresherContent>
-            </IonRefresher> */}
       </IonContent>
     </IonPage>
   );
