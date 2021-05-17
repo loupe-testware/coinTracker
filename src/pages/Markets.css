@@ -1,0 +1,91 @@
+.marketsContentContainer {
+  --background: var(--ion-color-primary);
+}
+
+.searchInputContainer {
+  padding: 20px;
+}
+
+.searchInput {
+  background-color: var(--ion-color-light);
+  border-radius: 15px;
+  height: 50px;
+}
+
+.marketTitleContainers {
+  display: grid;
+  padding-left: 20px;
+  padding-right: 20px;
+  grid-template-areas: "marketTitleRank . marketTitleName marketTitlePrice marketTitleAdd";
+  grid-template-columns: 40px 70px 2fr 2fr 1fr;
+}
+
+.marketTitleRank {
+  grid-area: marketTitleRank;
+}
+
+.marketTitleName {
+  grid-area: marketTitleName;
+  align-self: end;
+}
+
+.marketTitlePrice {
+  grid-area: marketTitlePrice;
+  align-self: end;
+}
+
+.marketTitleAdd {
+  grid-area: marketTitleAdd;
+  align-self: end;
+}
+
+.coinsMarketDataContainer {
+  background-color: var(--ion-color-light);
+  margin: 20px;
+  border-radius: 15px;
+  height: auto;
+  padding: 10px;
+}
+
+.coinContainer {
+  display: grid;
+  grid-template-areas: "coinMarketCapRank coinLogo coinSymbol coinPrice addToPortfolioButton" "coinMarketCapRank coinLogo coinName coinPercentage addToPortfolioButton";
+  grid-template-columns: 40px 50px 2fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.coinMarketCapRank {
+  grid-area: coinMarketCapRank;
+  justify-self: center;
+  align-self: center;
+}
+
+.coinLogo {
+  grid-area: coinLogo;
+  height: 36px;
+  width: 36px;
+  justify-self: center;
+  align-self: center;
+}
+
+.coinSymbol {
+  grid-area: coinSymbol;
+  padding-left: 15px;
+  align-self: end;
+}
+.coinName {
+  grid-area: coinName;
+  padding-left: 15px;
+}
+.coinPrice {
+  grid-area: coinPrice;
+  align-self: end;
+}
+.coinPercentage {
+  grid-area: coinPercentage;
+}
+.addToPortfolioButton {
+  grid-area: addToPortfolioButton;
+  background-color: var(--ion-color-light);
+  border: white solid 2px;
+}

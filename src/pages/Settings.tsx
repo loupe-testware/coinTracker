@@ -8,8 +8,7 @@ const Settings: React.FC = () => {
 
   return (
     <IonPage>
-      <div className='settingsContainer'>
-      </div>
+
     </IonPage>
   );
 };
