@@ -1,0 +1,7 @@
+.portfolioTotalContainer {
+  background-color: purple;
+  margin: 20px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-areas: "portfolioName portfolioSettings" "portfolioPrice .";
+}
