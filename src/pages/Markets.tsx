@@ -15,7 +15,7 @@ const Markets: React.FC = () => {
   const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
 
   const dispatch = useDispatch()
-  
+//filter the payload by the search coins value
   const filteredPayload = payload?.filter((coin: coinInterface) => {
      if (coin.name.toLowerCase().includes(searchValue.toLowerCase()) || coin.symbol.toLowerCase().includes(searchValue.toLowerCase())){
       return coin
@@ -70,7 +70,8 @@ const Markets: React.FC = () => {
             })
           }
           {
-            filteredPayload.length !== 0 ? null : <div>
+            //if the filter running on payload returns nothing then display this section to allow this
+            filteredPayload?.length !== 0 ? null : <div>
               NO COINS FOUND
             </div>
           }
