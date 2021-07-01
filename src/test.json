@@ -4,6 +4,7 @@
     "coins" : [
         {
             "coin_name" : "btc",
+            "totalQuantity": 37,
             "transactions" : [
             {
             "type":"transfer",
