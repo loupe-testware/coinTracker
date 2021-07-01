@@ -1,23 +1,46 @@
 {
     "portfolios" :[
-        {"portfolio_name": "portfolio 1",
-    "coins" : [
         {
-            "coin_name" : "btc",
-            "totalQuantity": 37,
-            "transactions" : [
-            {
-            "type":"transfer",
-            "datetime": "20-07-1991",
-             "tradingPair": "EWT",
-             "exchange": "Kraken",
-             "quantity": 37,
-             "costTotal": 3700,
-             "costPer": 100,
-             "fees": 1.23
-            }
+            "portfolio_name": "portfolio 1",
+            "coins" : [
+                {
+                    "coin_name" : "btc",
+                    "totalQuantity": 37,
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                }
             ]
-            }
-        ]}
+        },
+        {
+            "portfolio_name": "portfolio 2",
+            "coins" : [
+                {
+                    "coin_name" : "btc",
+                    "totalQuantity": 85000,
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 }

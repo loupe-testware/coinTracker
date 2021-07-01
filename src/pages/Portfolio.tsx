@@ -22,14 +22,13 @@ const Portfolio: React.FC = () => {
         <IonSlides pager={true} options={slideOpts}>
           {
             dummyData.portfolios.map((item, index)=>{
-              
               return (
               <IonSlide>
                 <div className='portfolioTotalContainer'>
                   <div className='portfolioName'>{item.portfolio_name}</div>
                   <div className='portfolioSettings'>...</div>
-                  <div className='portfolioValue'>{item.coins.map((coin, index)=>{
-                      
+                  <div className='portfolioValue'>{item.coins.map((coin, index)=>{        
+                      return <div>{coin.totalQuantity}</div>
                   })}</div>
                 </div>
               </IonSlide>
