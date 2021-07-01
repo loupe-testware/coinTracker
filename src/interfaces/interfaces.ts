@@ -60,11 +60,17 @@ export interface coinsStoreInterface {
 }
 
 export interface portfoliosInterface {
-  CustomerId: number,
-  Portfolios: [{
-    name: string,
-    coins: {
-      bitcoin: {
+  customer_id: number,
+  customer_email: string,
+  customer_first_name: string,
+  customer_last_name: string,
+  portfolios: [
+    {
+    portfolio_name: string,
+    coins: 
+      [
+        {
+        coin_name:string,
         transactions: [{
           type: string,
           datetime: string,
@@ -75,7 +81,7 @@ export interface portfoliosInterface {
           costPer: number,
           fees: number
         }]
-      }
-    }
-  }]
+      }]
+  }
+]
 }

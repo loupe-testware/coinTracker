@@ -1,7 +1,18 @@
+.portfolioMainContainer {
+  --background: var(--ion-color-primary);
+  height: 100%;
+  width: 100%;
+}
+
 .portfolioTotalContainer {
-  background-color: purple;
+  background-color: var(--ion-color-light);
   margin: 20px;
+  padding: 15px;
   border-radius: 15px;
   display: grid;
   grid-template-areas: "portfolioName portfolioSettings" "portfolioPrice .";
+}
+
+.portfolioCoinsContainer {
+  background-color: var(--ion-color-light);
 }
