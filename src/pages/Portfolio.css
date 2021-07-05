@@ -52,6 +52,7 @@
 }
 
 .portfolioCoinLogo {
+  grid-area: logo;
   height: 36px !important;
   width: 36px;
   justify-self: center;
@@ -59,9 +60,19 @@
 }
 
 .portfolioCoinSymbol {
+  grid-area: symbol;
   align-self: center;
 }
 
 .portfolioCoinCurrentPrice {
+  grid-area: currentPrice;
   align-self: center;
+}
+
+.portfolioCoinValue{
+ grid-area: value
+}
+
+.portfolioCoinPercentChange{
+  grid-area: percentChange
 }

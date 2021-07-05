@@ -29,6 +29,7 @@ const Portfolio: React.FC = () => {
     event.detail.complete();
   }
 
+  const totalCoinValueArray: any = []
   return (
     <IonPage>
       <IonContent className='portfolioMainContainer'>
@@ -58,15 +59,17 @@ const Portfolio: React.FC = () => {
                             return item
                           }
                         })
-
+                        
                         const coinTotal = coin.transactions.reduce((prev, cur)=>{
                           return prev + cur.quantity;
                         }, 0)
+                        totalCoinValueArray.push((Math.round((coinTotal*coinData[0].current_price) * 100) / 100).toFixed(2))
+                        console.log(totalCoinValueArray);
                         
                         return(
                         <>
                         {
-                          coinData ?  <IonReorder>
+                          coinData ? <IonReorder>
                           <div className="portfolioCoinContainer">
                             <img className="portfolioCoinLogo" src={coinData[0].image} alt='coin logo'/>
                             <div className="portfolioCoinSymbol">
@@ -75,8 +78,13 @@ const Portfolio: React.FC = () => {
                             <div className="portfolioCoinCurrentPrice">
                               ${coinData[0].current_price}
                             </div>
+                            <div className="portfolioCoinPercentChange">
+                            <div style={{color: coinData[0].price_change_percentage_24h < 0 ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'}} className='portfolioCoinPercentChange'>
+                              {coinData[0].price_change_percentage_24h}%
+                            </div>
+                            </div>
                             <div className="portfolioCoinValue">
-                            {coinTotal}
+                            ${(Math.round((coinTotal * coinData[0].current_price) * 100) / 100).toFixed(2) }
                             </div>
                           </div>
                         </IonReorder>
