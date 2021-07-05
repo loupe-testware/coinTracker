@@ -8,6 +8,7 @@ import { coinInterface, coinsStoreInterface } from '../interfaces/interfaces'
 import dummyData from '../test.json'
 
 import './Portfolio.css';
+import { useEffect } from 'react';
 
 const Portfolio: React.FC = () => {
   const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
@@ -27,8 +28,6 @@ const Portfolio: React.FC = () => {
   function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
     event.detail.complete();
   }
-
-  console.log(payload);
 
   return (
     <IonPage>
@@ -54,7 +53,7 @@ const Portfolio: React.FC = () => {
                   <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
                     {
                       item.coins.map((coin, index)=>{
-                        const coinData = payload.filter((item)=>{
+                        const coinData = payload?.filter((item)=>{
                           if (coin.coin_name === item.id){
                             return item
                           }
@@ -65,24 +64,29 @@ const Portfolio: React.FC = () => {
                         }, 0)
                         
                         return(
-                          <IonReorder>
-                            <div className="portfolioCoinContainer">
-                              <img className="portfolioCoinLogo" src={coinData[0].image} alt='coin logo'/>
-                              <div className="portfolioCoinSymbol">
-                              {coinData[0].symbol.toUpperCase()}
-                              </div>
-                              <div className="portfolioCoinCurrentPrice">
-                                {coinData[0].current_price}
-                              </div>
-                              <div className="portfolioCoinValue">
-                              {coinTotal}
-                              </div>
+                        <>
+                        {
+                          coinData ?  <IonReorder>
+                          <div className="portfolioCoinContainer">
+                            <img className="portfolioCoinLogo" src={coinData[0].image} alt='coin logo'/>
+                            <div className="portfolioCoinSymbol">
+                            {coinData[0].symbol.toUpperCase()}
                             </div>
-                          </IonReorder>
+                            <div className="portfolioCoinCurrentPrice">
+                              ${coinData[0].current_price}
+                            </div>
+                            <div className="portfolioCoinValue">
+                            {coinTotal}
+                            </div>
+                          </div>
+                        </IonReorder>
+                        :
+                        'LOADING COIN DATA'
+                        }
+                          </>
                         )
                       })
                     }
-                   
                   </IonReorderGroup>
                 </div>
                 </div>
