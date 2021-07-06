@@ -1,5 +1,6 @@
 import { IonContent, IonPage, IonRefresher, IonRefresherContent, IonSlides, IonSlide, IonReorder, IonReorderGroup } from '@ionic/react';
 import { RefresherEventDetail, ItemReorderEventDetail } from '@ionic/core'
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {getCoins} from '../redux/coinSlice'
 
@@ -8,7 +9,6 @@ import { coinInterface, coinsStoreInterface } from '../interfaces/interfaces'
 import dummyData from '../test.json'
 
 import './Portfolio.css';
-import { useEffect } from 'react';
 
 const Portfolio: React.FC = () => {
   const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
@@ -16,7 +16,7 @@ const Portfolio: React.FC = () => {
 
   //slide options and speed
   const slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
   
@@ -30,6 +30,12 @@ const Portfolio: React.FC = () => {
   }
 
   const totalCoinValueArray: any = []
+  const [test, setTest] = useState([])
+  console.log(test);
+  useEffect(()=>{
+    setTest(totalCoinValueArray)
+  },[])
+  
   return (
     <IonPage>
       <IonContent className='portfolioMainContainer'>
@@ -40,6 +46,7 @@ const Portfolio: React.FC = () => {
         <IonSlides pager={true} options={slideOpts}>
           {
             dummyData.portfolios.map((item, index)=>{
+              let portfolioCoinIndex =  index
               return (
               <IonSlide className='portfolioSlideContainer'>
                 <div className='portfolioSlide'>
@@ -47,14 +54,14 @@ const Portfolio: React.FC = () => {
                   <div className='portfolioName'>{item.portfolio_name}</div>
                   <div className='portfolioSettings'>...</div>
                   <div className='portfolioValue'>
-                    £VALUE
+                    {test[portfolioCoinIndex]}
                   </div>
                 </div>
                 <div className='portfolioCoinsContainer'>
                   <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
                     {
-                      item.coins.map((coin, index)=>{
-                        const coinData = payload?.filter((item)=>{
+                     item.coins.map((coin, index)=>{
+                      const coinData = payload?.filter((item)=>{
                           if (coin.coin_name === item.id){
                             return item
                           }
@@ -63,9 +70,15 @@ const Portfolio: React.FC = () => {
                         const coinTotal = coin.transactions.reduce((prev, cur)=>{
                           return prev + cur.quantity;
                         }, 0)
-                        totalCoinValueArray.push((Math.round((coinTotal*coinData[0].current_price) * 100) / 100).toFixed(2))
-                        console.log(totalCoinValueArray);
-                        
+
+                        if (coinData) {                   
+                          console.log(index);
+                          if (index === 0){
+                            totalCoinValueArray[portfolioCoinIndex] = 0
+                          }
+                          totalCoinValueArray[portfolioCoinIndex] += parseInt((Math.round((coinTotal*coinData[0].current_price) * 100) / 100).toFixed(2))
+                          console.log(totalCoinValueArray)
+                        }
                         return(
                         <>
                         {
@@ -84,7 +97,7 @@ const Portfolio: React.FC = () => {
                             </div>
                             </div>
                             <div className="portfolioCoinValue">
-                            ${(Math.round((coinTotal * coinData[0].current_price) * 100) / 100).toFixed(2) }
+                            ${(Math.round((coinTotal * coinData[0].current_price) * 100) / 100).toFixed(2)}
                             </div>
                           </div>
                         </IonReorder>
