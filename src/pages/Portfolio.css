@@ -47,8 +47,9 @@
 
 .portfolioCoinContainer {
   display: grid;
-  grid-template-areas: "logo symbol currentPrice value" "logo symbol percentChange value";
-  grid-template-columns: 10% 30% 30% 30%;
+  grid-template-areas: "logo symbol currentPrice value" "logo symbol percentChange coinQuantity";
+  grid-template-columns: 12% 16% 28% 44%;
+  padding: 10px;
 }
 
 .portfolioCoinLogo {
@@ -57,22 +58,36 @@
   width: 36px;
   justify-self: center;
   align-self: center;
+  border-radius: 50%;
 }
 
 .portfolioCoinSymbol {
   grid-area: symbol;
   align-self: center;
+  justify-self: start;
 }
 
 .portfolioCoinCurrentPrice {
   grid-area: currentPrice;
   align-self: center;
+  justify-self: end;
 }
 
-.portfolioCoinValue{
- grid-area: value
+.portfolioCoinValue {
+  grid-area: value;
+  align-self: center;
+  justify-self: end;
 }
 
-.portfolioCoinPercentChange{
-  grid-area: percentChange
+.portfolioCoinPercentChange {
+  grid-area: percentChange;
+  justify-self: end;
+  font-size: 15px;
+}
+
+.portfolioCoinQuantity {
+  grid-area: coinQuantity;
+  align-self: center;
+  justify-self: end;
+  font-size: 15px;
 }

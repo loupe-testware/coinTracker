@@ -12,6 +12,8 @@ import './Portfolio.css';
 
 const Portfolio: React.FC = () => {
   const { payload } = useSelector((state: coinsStoreInterface) => state.coins.list)
+  const totalCoinValueArray: any = []
+  const [totalPortfolioValue, setTotalPortfolioValue] = useState([])
   const dispatch = useDispatch()
 
   //slide options and speed
@@ -29,12 +31,10 @@ const Portfolio: React.FC = () => {
     event.detail.complete();
   }
 
-  const totalCoinValueArray: any = []
-  const [test, setTest] = useState([])
-  console.log(test);
   useEffect(()=>{
-    setTest(totalCoinValueArray)
-  },[])
+    setTotalPortfolioValue(totalCoinValueArray)
+  },[payload])
+  console.log(totalCoinValueArray);
   
   return (
     <IonPage>
@@ -54,7 +54,7 @@ const Portfolio: React.FC = () => {
                   <div className='portfolioName'>{item.portfolio_name}</div>
                   <div className='portfolioSettings'>...</div>
                   <div className='portfolioValue'>
-                    {test[portfolioCoinIndex]}
+                    ${totalPortfolioValue[portfolioCoinIndex]}
                   </div>
                 </div>
                 <div className='portfolioCoinsContainer'>
@@ -72,12 +72,10 @@ const Portfolio: React.FC = () => {
                         }, 0)
 
                         if (coinData) {                   
-                          console.log(index);
                           if (index === 0){
                             totalCoinValueArray[portfolioCoinIndex] = 0
                           }
                           totalCoinValueArray[portfolioCoinIndex] += parseInt((Math.round((coinTotal*coinData[0].current_price) * 100) / 100).toFixed(2))
-                          console.log(totalCoinValueArray)
                         }
                         return(
                         <>
@@ -93,11 +91,14 @@ const Portfolio: React.FC = () => {
                             </div>
                             <div className="portfolioCoinPercentChange">
                             <div style={{color: coinData[0].price_change_percentage_24h < 0 ? 'var(--ion-color-danger)' : 'var(--ion-color-success)'}} className='portfolioCoinPercentChange'>
-                              {coinData[0].price_change_percentage_24h}%
+                              {(coinData[0].price_change_percentage_24h).toFixed(2)}%
                             </div>
                             </div>
                             <div className="portfolioCoinValue">
                             ${(Math.round((coinTotal * coinData[0].current_price) * 100) / 100).toFixed(2)}
+                            </div>
+                            <div className="portfolioCoinQuantity">
+                              {coinTotal}
                             </div>
                           </div>
                         </IonReorder>

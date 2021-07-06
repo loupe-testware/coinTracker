@@ -1,11 +1,10 @@
 {
     "portfolios" :[
         {
-            "portfolio_name": "portfolio 1",
+            "portfolio_name": "Portfolio 1",
             "coins" : [
                 {
                     "coin_name" : "bitcoin",
-                    "totalQuantity": 74,
                     "transactions" : [
                         {
                     "type":"transfer",
@@ -31,7 +30,6 @@
                 },
                 {
                     "coin_name" : "ethereum",
-                    "totalQuantity": 74,
                     "transactions" : [
                         {
                     "type":"transfer",
@@ -56,7 +54,102 @@
                     ]
                 }, {
                     "coin_name" : "dogecoin",
-                    "totalQuantity": 74,
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 47,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        },
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                }, {
+                    "coin_name" : "kusama",
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 47,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        },
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                },{
+                    "coin_name" : "polkadot",
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 47,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        },
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                },{
+                    "coin_name" : "litecoin",
+                    "transactions" : [
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 47,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        },
+                        {
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 37,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        }
+                    ]
+                },{
+                    "coin_name" : "binancecoin",
                     "transactions" : [
                         {
                     "type":"transfer",
@@ -83,18 +176,26 @@
             ]
         },
         {
-            "portfolio_name": "portfolio 2",
+            "portfolio_name": "Portfolio 2",
             "coins" : [
                 {
                     "coin_name" : "bitcoin",
-                    "totalQuantity": 85000,
                     "transactions" : [
                         {
                     "type":"transfer",
                     "datetime": "20-07-1991",
                     "tradingPair": "EWT",
                     "exchange": "Kraken",
-                    "quantity": 37,
+                    "quantity": 17,
+                    "costTotal": 3700,
+                    "costPer": 100,
+                    "fees": 1.23
+                        },{
+                    "type":"transfer",
+                    "datetime": "20-07-1991",
+                    "tradingPair": "EWT",
+                    "exchange": "Kraken",
+                    "quantity": 17,
                     "costTotal": 3700,
                     "costPer": 100,
                     "fees": 1.23
