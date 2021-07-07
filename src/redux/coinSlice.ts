@@ -7,30 +7,30 @@ export const getCoins = createAsyncThunk("coins/getcoins", async () => {
 });
 
 interface coinsInitialStateInterface {
-  list: object,
-  status: string
+  list: object;
+  status: string;
 }
 
 const initialState: coinsInitialStateInterface = {
   list: [],
   status: "initial",
-}
+};
 
 const coinsSlice = createSlice({
   name: "coins",
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addCase(getCoins.pending, (state) => {
       state.status = "loading";
-    })
+    });
     builder.addCase(getCoins.fulfilled, (state, payload) => {
       state.status = "success";
       state.list = payload;
-    })
+    });
     builder.addCase(getCoins.rejected, (state) => {
       state.status = "failed";
-    })
+    });
   },
 });
 

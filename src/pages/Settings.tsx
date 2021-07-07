@@ -1,16 +1,10 @@
-import { IonPage } from '@ionic/react';
+import { IonPage } from "@ionic/react";
 
 //Styling
-import './Settings.css';
-
+import "./Settings.css";
 
 const Settings: React.FC = () => {
-
-  return (
-    <IonPage>
-
-    </IonPage>
-  );
+  return <IonPage></IonPage>;
 };
 
 export default Settings;
