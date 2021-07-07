@@ -52,6 +52,9 @@ const Portfolio: React.FC = () => {
   }, [payload]);
   console.log(totalCoinValueArray);
 
+ 
+  
+  
   return (
     <IonPage>
       <IonContent className="portfolioMainContainer">
@@ -62,7 +65,7 @@ const Portfolio: React.FC = () => {
           {dummyData.portfolios.map((item, index) => {
             let portfolioCoinIndex = index;
             return (
-              <IonSlide className="portfolioSlideContainer">
+              <IonSlide key={index} className="portfolioSlideContainer">
                 <div className="portfolioSlide">
                   <div className="portfolioTotalContainer">
                     <div className="portfolioName">{item.portfolio_name}</div>
@@ -89,7 +92,8 @@ const Portfolio: React.FC = () => {
                           },
                           0
                         );
-
+                        
+                        
                         if (coinData) {
                           if (index === 0) {
                             totalCoinValueArray[portfolioCoinIndex] = 0;
@@ -106,7 +110,7 @@ const Portfolio: React.FC = () => {
                           <>
                             {coinData ? (
                               <>
-                                <IonReorder>
+                                <IonReorder key={index}>
                                   <div
                                     className="portfolioCoinContainer"
                                     onClick={() =>
@@ -164,6 +168,7 @@ const Portfolio: React.FC = () => {
                                     setShowTransactionsModal={
                                       setShowTransactionsModal
                                     }
+                                    transactions={coin.transactions}
                                   />
                                 </IonContent>
                               </>

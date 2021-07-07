@@ -91,4 +91,5 @@ export interface portfoliosInterface {
 export interface transactionsModalComponentInterface {
   setShowTransactionsModal: any;
   showTransactionsModal: boolean;
+  transactions: any
 }
