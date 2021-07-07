@@ -29,7 +29,7 @@ const Portfolio: React.FC = () => {
   );
   const totalCoinValueArray: any = [];
   const [totalPortfolioValue, setTotalPortfolioValue] = useState([]);
-  const [showTransactionsModal, setShowTransactionsModal] = useState(false);
+  const [showTransactionsModal, setShowTransactionsModal] = useState('');
   const dispatch = useDispatch();
 
   //slide options and speed
@@ -50,11 +50,7 @@ const Portfolio: React.FC = () => {
   useEffect(() => {
     setTotalPortfolioValue(totalCoinValueArray);
   }, [payload]);
-  console.log(totalCoinValueArray);
 
- 
-  
-  
   return (
     <IonPage>
       <IonContent className="portfolioMainContainer">
@@ -92,7 +88,7 @@ const Portfolio: React.FC = () => {
                           },
                           0
                         );
-                        
+                        var uniqueModalIndex = ''
                         
                         if (coinData) {
                           if (index === 0) {
@@ -102,10 +98,18 @@ const Portfolio: React.FC = () => {
                             (
                               Math.round(
                                 coinTotal * coinData[0].current_price * 100
-                              ) / 100
-                            ).toFixed(2)
-                          );
+                                ) / 100
+                                ).toFixed(2)
+                                );
+                                uniqueModalIndex = coinData[0].id + portfolioCoinIndex
                         }
+                        
+                       
+                        console.log(uniqueModalIndex);
+                        
+                        
+                        
+                        
                         return (
                           <>
                             {coinData ? (
@@ -114,7 +118,7 @@ const Portfolio: React.FC = () => {
                                   <div
                                     className="portfolioCoinContainer"
                                     onClick={() =>
-                                      setShowTransactionsModal(true)
+                                      setShowTransactionsModal(uniqueModalIndex)
                                     }
                                   >
                                     <img
@@ -162,6 +166,7 @@ const Portfolio: React.FC = () => {
                                 </IonReorder>
                                 <IonContent>
                                   <TransactionsModal
+                                    uniqueModalIndex={uniqueModalIndex}
                                     showTransactionsModal={
                                       showTransactionsModal
                                     }

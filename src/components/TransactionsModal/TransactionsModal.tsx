@@ -6,13 +6,13 @@ import "./TransactionsModal.css";
 const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
   setShowTransactionsModal,
   showTransactionsModal,
-  transactions
+  transactions,
+  uniqueModalIndex
 }) => {
-    console.log(transactions);
     
   return (
     <>
-      <IonModal isOpen={showTransactionsModal} cssClass="my-custom-class">
+      <IonModal isOpen={showTransactionsModal===uniqueModalIndex} cssClass="my-custom-class">
         <p>TYPE: {transactions.length}</p>
         <IonButton onClick={() => setShowTransactionsModal(false)}>
           Close Modal
