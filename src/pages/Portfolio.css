@@ -1,0 +1,93 @@
+.portfolioMainContainer {
+  --background: var(--ion-color-primary);
+  height: 100%;
+  width: 100%;
+}
+
+.portfolioSlideContainer {
+  height: 100vh;
+  width: 100%;
+}
+
+.portfolioSlide {
+  height: 100%;
+  width: 100%;
+  grid-template-areas: "portfolioHeader" "portfolioBody";
+}
+
+.portfolioTotalContainer {
+  grid-area: portfolioHeader;
+  background-color: var(--ion-color-light);
+  margin: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-areas: "portfolioName portfolioSettings" "portfolioPrice .";
+}
+
+.portfolioName {
+  grid-area: portfolioName;
+}
+
+.portfolioSettings {
+  grid-area: portfolioSettings;
+}
+
+.portfolioPrice {
+  grid-area: portfolioPrice;
+}
+
+.portfolioCoinsContainer {
+  background-color: var(--ion-color-light);
+  grid-area: portfolioBody;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.portfolioCoinContainer {
+  display: grid;
+  grid-template-areas: "logo symbol currentPrice value" "logo symbol percentChange coinQuantity";
+  grid-template-columns: 12% 16% 28% 44%;
+  padding: 10px;
+}
+
+.portfolioCoinLogo {
+  grid-area: logo;
+  height: 36px !important;
+  width: 36px;
+  justify-self: center;
+  align-self: center;
+  border-radius: 50%;
+}
+
+.portfolioCoinSymbol {
+  grid-area: symbol;
+  align-self: center;
+  justify-self: start;
+}
+
+.portfolioCoinCurrentPrice {
+  grid-area: currentPrice;
+  align-self: center;
+  justify-self: end;
+}
+
+.portfolioCoinValue {
+  grid-area: value;
+  align-self: center;
+  justify-self: end;
+}
+
+.portfolioCoinPercentChange {
+  grid-area: percentChange;
+  justify-self: end;
+  font-size: 15px;
+}
+
+.portfolioCoinQuantity {
+  grid-area: coinQuantity;
+  align-self: center;
+  justify-self: end;
+  font-size: 15px;
+}

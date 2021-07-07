@@ -52,6 +52,7 @@
   grid-template-areas: "coinMarketCapRank coinLogo coinSymbol coinPrice addToPortfolioButton" "coinMarketCapRank coinLogo coinName coinPercentage addToPortfolioButton";
   grid-template-columns: 40px 50px 2fr 2fr 1fr;
   grid-template-rows: 1fr 1fr;
+  height: 60px;
 }
 
 .coinMarketCapRank {

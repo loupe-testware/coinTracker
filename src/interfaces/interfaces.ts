@@ -58,3 +58,30 @@ export interface coinsStoreInterface {
     status: string
   }
 }
+
+export interface portfoliosInterface {
+  customer_id: number,
+  customer_email: string,
+  customer_first_name: string,
+  customer_last_name: string,
+  portfolios: [
+    {
+    portfolio_name: string,
+    coins: 
+      [
+        {
+        coin_name:string,
+        transactions: [{
+          type: string,
+          datetime: string,
+          tradingPair: string,
+          exchange: string,
+          quantity: number,
+          costTotal: number,
+          costPer: number,
+          fees: number
+        }]
+      }]
+  }
+]
+}
