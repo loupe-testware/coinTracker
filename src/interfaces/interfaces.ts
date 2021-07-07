@@ -91,6 +91,6 @@ export interface portfoliosInterface {
 export interface transactionsModalComponentInterface {
   setShowTransactionsModal: any;
   showTransactionsModal: string;
-  transactions: any,
-  uniqueModalIndex: string
+  coin: any;
+  uniqueModalIndex: string;
 }

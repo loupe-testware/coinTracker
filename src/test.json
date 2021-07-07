@@ -75,25 +75,27 @@
               "costTotal": 3700,
               "costPer": 100,
               "fees": 1.23
-            },{
-                "type": "transfer",
-                "datetime": "20-07-1991",
-                "tradingPair": "EWT",
-                "exchange": "Kraken",
-                "quantity": 37,
-                "costTotal": 3700,
-                "costPer": 100,
-                "fees": 1.23
-              },{
-                "type": "transfer",
-                "datetime": "20-07-1991",
-                "tradingPair": "EWT",
-                "exchange": "Kraken",
-                "quantity": 37,
-                "costTotal": 3700,
-                "costPer": 100,
-                "fees": 1.23
-              }
+            },
+            {
+              "type": "transfer",
+              "datetime": "20-07-1991",
+              "tradingPair": "EWT",
+              "exchange": "Kraken",
+              "quantity": 37,
+              "costTotal": 3700,
+              "costPer": 100,
+              "fees": 1.23
+            },
+            {
+              "type": "transfer",
+              "datetime": "20-07-1991",
+              "tradingPair": "EWT",
+              "exchange": "Kraken",
+              "quantity": 37,
+              "costTotal": 3700,
+              "costPer": 100,
+              "fees": 1.23
+            }
           ]
         },
         {
@@ -227,7 +229,8 @@
           ]
         }
       ]
-    },    {
+    },
+    {
       "portfolio_name": "Portfolio 3",
       "coins": [
         {
