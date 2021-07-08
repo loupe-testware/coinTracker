@@ -5,6 +5,7 @@
 .transactionModalContainer {
   display: grid;
   grid-template-areas: "icon type quantity" "icon date value";
+  margin: 15px;
 }
 
 .transactionModalIcon {
@@ -28,11 +29,8 @@
 }
 
 .transactionsModal .modal-wrapper {
-  background-color: red;
-  height: 90%;
-  width: 90%;
-  border-radius: 25px;
 }
+
 .transactionsModalCloseButton {
   width: 90%;
   margin-bottom: 25px;

@@ -1,6 +1,15 @@
-import { IonModal, IonButton, IonIcon } from "@ionic/react";
+import { useState } from "react";
+
+import {
+  IonModal,
+  IonButton,
+  IonIcon,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+} from "@ionic/react";
 import { transactionsModalComponentInterface } from "../../interfaces/interfaces";
-import { cash } from "ionicons/icons"
+import { cash } from "ionicons/icons";
 
 import "./TransactionsModal.css";
 
@@ -10,39 +19,66 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
   coin,
   uniqueModalIndex,
 }) => {
+  const [selectedSegment, setSelectedSegment] = useState<any>("transactions");
 
-
+  console.log(showTransactionsModal);
+  
   return (
     <IonModal
-    isOpen={showTransactionsModal === uniqueModalIndex}
-    cssClass='transactionsModal'
+      isOpen={showTransactionsModal === uniqueModalIndex}
+      cssClass="transactionsModal"
+      backdropDismiss={true}
+      onDidDismiss={()=> setShowTransactionsModal(false)}
     >
-      <div className='transactionsModalContainer'>
-        <div>{coin.coin_name} Transactions</div>
-        {coin.transactions.map((item: any, index: number) => {
-          return <div className="transactionModalContainer">
-        
-              <IonIcon size='large' className='transactionModalIcon' icon={cash}/>
-        
-            <div className='transactionModalType'>
-              {item.type}
-            </div>
-            <div className='transactionModalDate'>
-              {item.datetime}
-            </div>
-            <div className='transactionModalQuantity'>
-              {item.quantity}
-            </div>
-            <div className='transactionModalCost'>
-              ${item.quantity * item.costPer}
-            </div>
-          </div>;
-        })}
+      <IonSegment
+        onIonChange={(e) => setSelectedSegment(e.detail.value)}
+        value={selectedSegment}
+      >
+        <IonSegmentButton value="transactions">
+          <IonLabel>Transactions</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="other">
+          <IonLabel>Other</IonLabel>
+        </IonSegmentButton>
+      </IonSegment>
+      {selectedSegment === "transactions" ? (
+        <div className="transactionsModalContainer">
+          <div>{coin.coin_name}</div>
+          {coin.transactions.map((item: any, index: number) => {
+            return (
+              <div
+                key={index}
+                className="transactionModalContainer"
+                onClick={() => {
+                  console.log(item.quantity);
+                }}
+              >
+                <IonIcon
+                  size="large"
+                  className="transactionModalIcon"
+                  icon={cash}
+                />
+                <div className="transactionModalType">{item.type}</div>
+                <div className="transactionModalDate">{item.datetime}</div>
+                <div className="transactionModalQuantity">{item.quantity}</div>
+                <div className="transactionModalCost">
+                  ${item.quantity * item.costPer}
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <IonButton className='transactionsModalCloseButton' onClick={() => setShowTransactionsModal(false)}>
-          Close Modal
-        </IonButton>
-      </IonModal>
+      ) : (
+        <div>OTHER</div>
+      )}
+
+      <IonButton
+        className="transactionsModalCloseButton"
+        onClick={() => setShowTransactionsModal(false)}
+      >
+        Close
+      </IonButton>
+    </IonModal>
   );
 };
 
