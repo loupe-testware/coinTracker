@@ -20,15 +20,17 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
   uniqueModalIndex,
 }) => {
   const [selectedSegment, setSelectedSegment] = useState<any>("transactions");
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<boolean>(false);
 
   console.log(showTransactionsModal);
-  
+
   return (
     <IonModal
       isOpen={showTransactionsModal === uniqueModalIndex}
       cssClass="transactionsModal"
       backdropDismiss={true}
-      onDidDismiss={()=> setShowTransactionsModal(false)}
+      onDidDismiss={() => setShowTransactionsModal(false)}
     >
       <IonSegment
         onIonChange={(e) => setSelectedSegment(e.detail.value)}
@@ -50,7 +52,7 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
                 key={index}
                 className="transactionModalContainer"
                 onClick={() => {
-                  console.log(item.quantity);
+                  setSelectedTransaction(true);
                 }}
               >
                 <IonIcon
@@ -64,6 +66,16 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
                 <div className="transactionModalCost">
                   ${item.quantity * item.costPer}
                 </div>
+                <IonModal
+                  isOpen={selectedTransaction}
+                  backdropDismiss={true}
+                  onDidDismiss={() => setSelectedTransaction(false)}
+                >
+                  <div>TESTTEST</div>
+                  <IonButton onClick={() => setSelectedTransaction(false)}>
+                    Close
+                  </IonButton>
+                </IonModal>
               </div>
             );
           })}
