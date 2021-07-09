@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import SingleTransactionModal from "../SingleTransactionModal/SingleTransactionModal";
+
 import {
   IonModal,
   IonButton,
@@ -20,10 +22,7 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
   uniqueModalIndex,
 }) => {
   const [selectedSegment, setSelectedSegment] = useState<any>("transactions");
-  const [selectedTransaction, setSelectedTransaction] =
-    useState<boolean>(false);
-
-  console.log(showTransactionsModal);
+  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
 
   return (
     <IonModal
@@ -47,12 +46,14 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
         <div className="transactionsModalContainer">
           <div>{coin.coin_name}</div>
           {coin.transactions.map((item: any, index: number) => {
+            console.log(selectedTransaction, index);
             return (
               <div
                 key={index}
                 className="transactionModalContainer"
                 onClick={() => {
-                  setSelectedTransaction(true);
+                  if (index !== selectedTransaction)
+                    setSelectedTransaction(index);
                 }}
               >
                 <IonIcon
@@ -66,16 +67,12 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
                 <div className="transactionModalCost">
                   ${item.quantity * item.costPer}
                 </div>
-                <IonModal
-                  isOpen={selectedTransaction}
-                  backdropDismiss={true}
-                  onDidDismiss={() => setSelectedTransaction(false)}
-                >
-                  <div>TESTTEST</div>
-                  <IonButton onClick={() => setSelectedTransaction(false)}>
-                    Close
-                  </IonButton>
-                </IonModal>
+                <SingleTransactionModal
+                  item={item}
+                  index={index}
+                  selectedTransaction={selectedTransaction}
+                  setSelectedTransaction={setSelectedTransaction}
+                />
               </div>
             );
           })}
