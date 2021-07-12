@@ -53,6 +53,10 @@ const App: React.FC = () => {
   //Dispatch for redux
   const dispatch = useDispatch();
 
+  fetch("https://30bglyrnxl.execute-api.eu-west-2.amazonaws.com/dev")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
   //function to check the user is signed
   async function isUserSignedIn() {
     const userCredentials = await Auth.currentUserCredentials();

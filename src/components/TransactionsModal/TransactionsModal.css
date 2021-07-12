@@ -1,0 +1,38 @@
+.transactionsModalContainer {
+  margin: 25px;
+}
+
+.transactionModalContainer {
+  display: grid;
+  grid-template-areas: "icon type quantity" "icon date value";
+  margin: 15px;
+}
+
+.transactionModalIcon {
+  grid-area: icon;
+}
+
+.transactionModalType {
+  grid-area: type;
+}
+
+.transactionModalDate {
+  grid-area: date;
+}
+
+.transactionModalQuantity {
+  grid-area: quantity;
+}
+
+.transactionModalCost {
+  grid-area: value;
+}
+
+.transactionsModal .modal-wrapper {
+}
+
+.transactionsModalCloseButton {
+  width: 90%;
+  margin-bottom: 25px;
+  align-self: center;
+}

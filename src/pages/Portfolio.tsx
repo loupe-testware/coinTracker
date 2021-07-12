@@ -7,8 +7,7 @@ import {
   IonSlide,
   IonReorder,
   IonReorderGroup,
-  IonModal,
-  IonButton,
+  IonSkeletonText,
 } from "@ionic/react";
 import { RefresherEventDetail, ItemReorderEventDetail } from "@ionic/core";
 import { useEffect, useState } from "react";
@@ -29,7 +28,7 @@ const Portfolio: React.FC = () => {
   );
   const totalCoinValueArray: any = [];
   const [totalPortfolioValue, setTotalPortfolioValue] = useState([]);
-  const [showTransactionsModal, setShowTransactionsModal] = useState(false);
+  const [showTransactionsModal, setShowTransactionsModal] = useState("");
   const dispatch = useDispatch();
 
   //slide options and speed
@@ -50,7 +49,6 @@ const Portfolio: React.FC = () => {
   useEffect(() => {
     setTotalPortfolioValue(totalCoinValueArray);
   }, [payload]);
-  console.log(totalCoinValueArray);
 
   return (
     <IonPage>
@@ -62,7 +60,7 @@ const Portfolio: React.FC = () => {
           {dummyData.portfolios.map((item, index) => {
             let portfolioCoinIndex = index;
             return (
-              <IonSlide className="portfolioSlideContainer">
+              <IonSlide key={index} className="portfolioSlideContainer">
                 <div className="portfolioSlide">
                   <div className="portfolioTotalContainer">
                     <div className="portfolioName">{item.portfolio_name}</div>
@@ -89,6 +87,7 @@ const Portfolio: React.FC = () => {
                           },
                           0
                         );
+                        var uniqueModalIndex = "";
 
                         if (coinData) {
                           if (index === 0) {
@@ -101,16 +100,19 @@ const Portfolio: React.FC = () => {
                               ) / 100
                             ).toFixed(2)
                           );
+                          uniqueModalIndex =
+                            coinData[0].id + portfolioCoinIndex;
                         }
+
                         return (
                           <>
                             {coinData ? (
                               <>
-                                <IonReorder>
+                                <IonReorder key={index}>
                                   <div
                                     className="portfolioCoinContainer"
                                     onClick={() =>
-                                      setShowTransactionsModal(true)
+                                      setShowTransactionsModal(uniqueModalIndex)
                                     }
                                   >
                                     <img
@@ -158,17 +160,34 @@ const Portfolio: React.FC = () => {
                                 </IonReorder>
                                 <IonContent>
                                   <TransactionsModal
+                                    uniqueModalIndex={uniqueModalIndex}
                                     showTransactionsModal={
                                       showTransactionsModal
                                     }
                                     setShowTransactionsModal={
                                       setShowTransactionsModal
                                     }
+                                    coin={coin}
                                   />
                                 </IonContent>
                               </>
                             ) : (
-                              "LOADING COIN DATA"
+                              <div className="portfolioSkeletonText">
+                                <div>
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "40%" }}
+                                  />
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "60%" }}
+                                  />
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "60%" }}
+                                  />
+                                </div>
+                              </div>
                             )}
                           </>
                         );

@@ -91,3 +91,11 @@
   justify-self: end;
   font-size: 15px;
 }
+
+ion-skeleton-text {
+  --background-rgb: 255, 255, 255;
+}
+
+.portfolioSkeletonText {
+  height: 47px;
+}
