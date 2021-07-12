@@ -46,7 +46,6 @@ const TransactionsModal: React.FC<transactionsModalComponentInterface> = ({
         <div className="transactionsModalContainer">
           <div>{coin.coin_name}</div>
           {coin.transactions.map((item: any, index: number) => {
-            console.log(selectedTransaction, index);
             return (
               <div
                 key={index}

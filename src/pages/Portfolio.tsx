@@ -7,8 +7,7 @@ import {
   IonSlide,
   IonReorder,
   IonReorderGroup,
-  IonModal,
-  IonButton,
+  IonSkeletonText,
 } from "@ionic/react";
 import { RefresherEventDetail, ItemReorderEventDetail } from "@ionic/core";
 import { useEffect, useState } from "react";
@@ -173,7 +172,22 @@ const Portfolio: React.FC = () => {
                                 </IonContent>
                               </>
                             ) : (
-                              "LOADING COIN DATA"
+                              <div className="portfolioSkeletonText">
+                                <div>
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "40%" }}
+                                  />
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "60%" }}
+                                  />
+                                  <IonSkeletonText
+                                    animated
+                                    style={{ width: "60%" }}
+                                  />
+                                </div>
+                              </div>
                             )}
                           </>
                         );
