@@ -5,6 +5,6 @@ import customerReducer from "./customerSlice";
 export default configureStore({
   reducer: {
     coins: coinsReducer,
-    customerDetails: customerReducer
+    customerDetails: customerReducer,
   },
 });

@@ -50,6 +50,10 @@ import Loading from "./components/Loading/Loading";
 const App: React.FC = () => {
   //Create formState to handle the users authentication path
   const [authState, setAuthState] = useState<string>("loading");
+  //   const [userDetails, setUserDetails] = useState<any>(false);
+  // useEffect(()=>{
+  //   Auth.currentAuthenticatedUser().then(data=> setUserDetails(data))
+  // },[])
 
   //Dispatch for redux
   const dispatch = useDispatch();

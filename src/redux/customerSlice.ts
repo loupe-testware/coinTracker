@@ -1,10 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Auth } from "aws-amplify";
 
-export const getCustomerDetails = createAsyncThunk("customer/getDetails", async () => {
-  return fetch(
-    "https://30bglyrnxl.execute-api.eu-west-2.amazonaws.com/dev"
-  ).then((res) => res.json());
-});
+export const getCustomerDetails = createAsyncThunk(
+  "customer/getDetails",
+  async () => {
+    return fetch(
+      "https://30bglyrnxl.execute-api.eu-west-2.amazonaws.com/dev/user",
+      {
+        method: "POST",
+        body: JSON.stringify(await Auth.currentAuthenticatedUser()),
+      }
+    ).then((res) => res.json());
+  }
+);
 
 interface customerInitialStateInterface {
   list: any;
