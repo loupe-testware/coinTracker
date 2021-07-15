@@ -26,6 +26,14 @@ const Portfolio: React.FC = () => {
   const { payload } = useSelector(
     (state: coinsStoreInterface) => state.coins.list
   );
+  const customerDetails  = useSelector(
+    (state: any) => state.customerDetails.list.payload
+  )
+
+  if (customerDetails){
+    
+  }
+  
   const totalCoinValueArray: any = [];
   const [totalPortfolioValue, setTotalPortfolioValue] = useState([]);
   const [showTransactionsModal, setShowTransactionsModal] = useState("");
@@ -57,7 +65,9 @@ const Portfolio: React.FC = () => {
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
         <IonSlides pager={true} options={slideOpts}>
-          {dummyData.portfolios.map((item, index) => {
+          {
+          customerDetails ? 
+          JSON.parse(customerDetails[0][4].stringValue).portfolios.map((item: any, index: any) => {
             let portfolioCoinIndex = index;
             return (
               <IonSlide key={index} className="portfolioSlideContainer">
@@ -74,7 +84,7 @@ const Portfolio: React.FC = () => {
                       disabled={true}
                       onIonItemReorder={doReorder}
                     >
-                      {item.coins.map((coin, index) => {
+                      {item.coins.map((coin: any, index: any) => {
                         const coinData = payload?.filter((item) => {
                           if (coin.coin_name === item.id) {
                             return item;
@@ -82,11 +92,12 @@ const Portfolio: React.FC = () => {
                         });
 
                         const coinTotal = coin.transactions.reduce(
-                          (prev, cur) => {
+                          (prev: any, cur: any) => {
                             return prev + cur.quantity;
                           },
                           0
                         );
+                        
                         var uniqueModalIndex = "";
 
                         if (coinData) {
@@ -197,7 +208,7 @@ const Portfolio: React.FC = () => {
                 </div>
               </IonSlide>
             );
-          })}
+          }): null}
         </IonSlides>
       </IonContent>
     </IonPage>
