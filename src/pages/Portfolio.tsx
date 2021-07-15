@@ -57,7 +57,7 @@ const Portfolio: React.FC = () => {
   useEffect(() => {
     setTotalPortfolioValue(totalCoinValueArray);
   }, [payload]);
-console.log(customerDetails);
+  console.log(customerDetails);
 
   return (
     <IonPage>
