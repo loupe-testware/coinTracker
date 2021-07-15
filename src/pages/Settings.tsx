@@ -4,7 +4,12 @@ import { IonPage } from "@ionic/react";
 import "./Settings.css";
 
 const Settings: React.FC = () => {
-  return <IonPage><button onClick={()=> localStorage.clear()}>SIGN OUT</button></IonPage>;
-};
+
+  function signOut(){
+    localStorage.clear()
+    window.location.reload()
+  }
+  return <IonPage><button onClick={()=> signOut()}>SIGN OUT</button></IonPage>;
+}; 
 
 export default Settings;
