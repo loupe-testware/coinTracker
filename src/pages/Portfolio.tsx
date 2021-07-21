@@ -18,8 +18,6 @@ import TransactionsModal from "../components/TransactionsModal/TransactionsModal
 
 import { coinsStoreInterface } from "../interfaces/interfaces";
 
-import dummyData from "../test.json";
-
 import "./Portfolio.css";
 
 const Portfolio: React.FC = () => {
@@ -29,10 +27,6 @@ const Portfolio: React.FC = () => {
   const customerDetails = useSelector(
     (state: any) => state.customerDetails.list.payload
   );
-  console.log(customerDetails);
-
-  if (customerDetails) {
-  }
 
   const totalCoinValueArray: any = [];
   const [totalPortfolioValue, setTotalPortfolioValue] = useState([]);
@@ -57,7 +51,6 @@ const Portfolio: React.FC = () => {
   useEffect(() => {
     setTotalPortfolioValue(totalCoinValueArray);
   }, [payload]);
-  console.log(customerDetails);
 
   return (
     <IonPage>
@@ -120,7 +113,7 @@ const Portfolio: React.FC = () => {
                                 uniqueModalIndex =
                                   coinData[0].id + portfolioCoinIndex;
                               }
-
+                              
                               return (
                                 <>
                                   {coinData ? (
