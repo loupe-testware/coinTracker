@@ -50,6 +50,7 @@
   grid-template-areas: "logo symbol currentPrice value" "logo symbol percentChange coinQuantity";
   grid-template-columns: 12% 16% 28% 44%;
   padding: 10px;
+ 
 }
 
 .portfolioCoinLogo {
@@ -90,6 +91,16 @@
   align-self: center;
   justify-self: end;
   font-size: 15px;
+}
+
+.portfolioAddTransactionButton{
+  grid-area: value / value / coinQuantity /  coinQuantity;
+  z-index: 2;
+  height: auto;
+  width: 80%;
+  justify-self: end;
+  margin: 0;
+  font-size: 16px;
 }
 
 ion-skeleton-text {

@@ -95,6 +95,12 @@ const Portfolio: React.FC = () => {
                               );
 
                               var uniqueModalIndex = "";
+                              
+                              function openTransactionsModal(){
+                                setShowTransactionsModal(
+                                  uniqueModalIndex
+                                )
+                              }
 
                               if (coinData) {
                                 if (index === 0) {
@@ -121,24 +127,28 @@ const Portfolio: React.FC = () => {
                                       <IonReorder key={index}>
                                         <div
                                           className="portfolioCoinContainer"
-                                          onClick={() =>
-                                            setShowTransactionsModal(
-                                              uniqueModalIndex
-                                            )
-                                          }
                                         >
                                           <img
                                             className="portfolioCoinLogo"
                                             src={coinData[0].image}
                                             alt="coin logo"
+                                            onClick={
+                                              openTransactionsModal
+                                            }
                                           />
-                                          <div className="portfolioCoinSymbol">
+                                          <div className="portfolioCoinSymbol" onClick={
+                                              openTransactionsModal
+                                            }>
                                             {coinData[0].symbol.toUpperCase()}
                                           </div>
-                                          <div className="portfolioCoinCurrentPrice">
+                                          <div className="portfolioCoinCurrentPrice" onClick={
+                                              openTransactionsModal
+                                            }>
                                             ${coinData[0].current_price}
                                           </div>
-                                          <div className="portfolioCoinPercentChange">
+                                          <div className="portfolioCoinPercentChange" onClick={
+                                              openTransactionsModal
+                                            }>
                                             <div
                                               style={{
                                                 color:
@@ -148,7 +158,9 @@ const Portfolio: React.FC = () => {
                                                     ? "var(--ion-color-danger)"
                                                     : "var(--ion-color-success)",
                                               }}
-                                              className="portfolioCoinPercentChange"
+                                              className="portfolioCoinPercentChange" onClick={
+                                                openTransactionsModal
+                                              }
                                             >
                                               {coinData[0].price_change_percentage_24h.toFixed(
                                                 2
@@ -156,19 +168,32 @@ const Portfolio: React.FC = () => {
                                               %
                                             </div>
                                           </div>
-                                          <div className="portfolioCoinValue">
-                                            $
-                                            {(
-                                              Math.round(
-                                                coinTotal *
-                                                  coinData[0].current_price *
-                                                  100
-                                              ) / 100
-                                            ).toFixed(2)}
-                                          </div>
-                                          <div className="portfolioCoinQuantity">
-                                            {coinTotal}
-                                          </div>
+                                          {
+                                            coinTotal !== 0 ?
+                                          <>
+                                            <div className="portfolioCoinValue" onClick={
+                                              openTransactionsModal
+                                            }>
+                                              $
+                                              {(
+                                                Math.round(
+                                                  coinTotal *
+                                                    coinData[0].current_price *
+                                                    100
+                                                ) / 100
+                                              ).toFixed(2)}
+                                            </div>
+                                            <div className="portfolioCoinQuantity" onClick={
+                                              openTransactionsModal
+                                            }>
+                                              {coinTotal}
+                                            </div>
+                                          </>
+                                          :
+                                          <button className="portfolioAddTransactionButton" onClick={()=>console.log('click')}>
+                                            Add
+                                          </button>
+                                          }
                                         </div>
                                       </IonReorder>
                                       <IonContent>
