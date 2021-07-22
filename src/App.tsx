@@ -19,6 +19,7 @@ import Markets from "./pages/Markets";
 //Redux
 import { useDispatch } from "react-redux";
 import { getCoins } from "./redux/coinSlice";
+import { getCustomerDetails } from "./redux/customerSlice";
 
 import { Auth } from "aws-amplify";
 
@@ -49,13 +50,13 @@ import Loading from "./components/Loading/Loading";
 const App: React.FC = () => {
   //Create formState to handle the users authentication path
   const [authState, setAuthState] = useState<string>("loading");
+  //   const [userDetails, setUserDetails] = useState<any>(false);
+  // useEffect(()=>{
+  //   Auth.currentAuthenticatedUser().then(data=> setUserDetails(data))
+  // },[])
 
   //Dispatch for redux
   const dispatch = useDispatch();
-
-  fetch("https://30bglyrnxl.execute-api.eu-west-2.amazonaws.com/dev")
-    .then((res) => res.json())
-    .then((data) => console.log(data));
 
   //function to check the user is signed
   async function isUserSignedIn() {
@@ -63,6 +64,7 @@ const App: React.FC = () => {
     if (userCredentials.authenticated) {
       setAuthState("signedIn");
       dispatch(getCoins());
+      dispatch(getCustomerDetails());
     } else if (
       authState !== "signIn" &&
       authState !== "signUp" &&
