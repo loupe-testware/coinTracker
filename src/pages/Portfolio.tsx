@@ -50,7 +50,7 @@ const Portfolio: React.FC = () => {
 
   useEffect(() => {
     setTotalPortfolioValue(totalCoinValueArray);
-  }, [payload]);
+  }, [payload, customerDetails]);
 
   return (
     <IonPage>
